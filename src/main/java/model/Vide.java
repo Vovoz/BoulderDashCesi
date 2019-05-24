@@ -5,14 +5,14 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class Dirt extends Block{
+public class Vide extends  Block{
 
     private Image image;
 
 
-    public Dirt(){
+    public Vide(){
         super();
-        this.ximg = 16;
+        this.ximg = 32;
         this.yimg = 0;
     }
 
@@ -22,7 +22,7 @@ public class Dirt extends Block{
     }
     public void setImage() {
         try {
-            this.image = ImageIO.read(new File( "block.png" ));
+            this.image = ImageIO.read(new File("block.png"));
 
         } catch (IOException e) {
             e.printStackTrace();

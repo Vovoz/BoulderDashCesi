@@ -8,6 +8,8 @@ public class Plateau extends Observable {
     public int xplayer;
     public int yplayer;
 
+    private int ndiamond;
+
     public Plateau() {
 
 
@@ -27,47 +29,126 @@ public class Plateau extends Observable {
                 this.blocks[n][i] = new Dirt();
             }
         }
+        this.blocks[5][13] = new Wall();
+        this.blocks[5][14] = new Wall();
+        this.blocks[5][15] = new Wall();
+        this.blocks[5][16] = new Wall();
+
+        this.blocks[4][16] = new Diamond();
+        this.blocks[3][16] = new Diamond();
+        this.blocks[4][17] = new Diamond();
+        this.blocks[3][17] = new Diamond();
+
+        this.blocks[4][18] = new Rock();
+        this.blocks[3][19] = new Rock();
+        this.blocks[2][17] = new Rock();
+        this.blocks[3][18] = new Rock();
 
         this.blocks[7][15] = new Player();
+
         this.xplayer = 15;
         this.yplayer = 7;
+        this.ndiamond = 0;
     }
 
-    public void move(String Direction){
-        switch (Direction) {
+    public void move(String direction){
+        switch (direction) {
             case "UP":
-        if(yplayer > 1) {
-            blocks[yplayer - 1][xplayer] = blocks[yplayer][xplayer];
-            blocks[yplayer][xplayer] = new Wall();
+                this.blocks[yplayer][xplayer].setDirection(direction);
+        if(this.blocks[yplayer - 1][xplayer].breakable == true) {
+            if(this.blocks[yplayer - 1][xplayer].lootable == true)
+                ndiamond++;
+            this.blocks[yplayer - 1][xplayer] =  this.blocks[yplayer][xplayer];
+            this.blocks[yplayer][xplayer] = new Vide();
             this.yplayer--;
-            System.out.println(yplayer);
+            updateVide(xplayer,yplayer + 1);
         }
         break;
         case "DOWN":
-            if(yplayer < 15) {
-                blocks[yplayer + 1][xplayer] = blocks[yplayer][xplayer];
-                blocks[yplayer][xplayer] = new Wall();
+            this.blocks[yplayer][xplayer].setDirection(direction);
+            if(this.blocks[this.yplayer + 1][this.xplayer].breakable == true ) {
+                if(this.blocks[this.yplayer + 1][this.xplayer].lootable == true)
+                    this.ndiamond++;
+                this.blocks[this.yplayer + 1][this.xplayer] =  this.blocks[yplayer][xplayer];
+                this.blocks[this.yplayer][this.xplayer] = new Vide();
                 this.yplayer++;
-                System.out.println(yplayer);
+                updateVide(this.xplayer,this.yplayer - 1);
             }
             break;
             case "LEFT":
-                if(xplayer > 1) {
-                    blocks[xplayer - 1][yplayer] = blocks[xplayer][yplayer];
-                    blocks[xplayer][yplayer] = new Wall();
+                this.blocks[yplayer][xplayer].setDirection(direction);
+                if(this.blocks[this.yplayer][this.xplayer - 1].breakable == true ) {
+                    if(this.blocks[this.yplayer][this.xplayer - 1].lootable == true)
+                        this.ndiamond++;
+                    this.blocks[this.yplayer][this.xplayer - 1] =  this.blocks[yplayer][xplayer];
+                    this.blocks[this.yplayer][this.xplayer] = new Vide();
                     this.xplayer--;
-                    System.out.println(xplayer);
+                    updateVide(this.xplayer + 1,this.yplayer );
                 }
                 break;
             case "RIGHT":
-                if(xplayer < 32) {
-                    blocks[xplayer - 1][yplayer] = blocks[xplayer][yplayer];
-                    blocks[xplayer][yplayer] = new Wall();
-                    this.xplayer--;
-                    System.out.println(xplayer);
+                this.blocks[yplayer][xplayer].setDirection(direction);
+                if(this.blocks[this.yplayer][this.xplayer + 1].breakable == true ) {
+                    if(this.blocks[this.yplayer][this.xplayer + 1].lootable == true)
+                        this.ndiamond++;
+                    this.blocks[this.yplayer][this.xplayer + 1] =  this.blocks[this.yplayer][this.xplayer];
+                    this.blocks[this.yplayer][this.xplayer] = new Vide();
+                    this.xplayer++;
+                    updateVide(this.xplayer - 1,this.yplayer);
                 }
                 break;
+        }
+        System.out.println("x " + this.xplayer);
+        System.out.println("y " + this.yplayer);
+
+        System.out.println("ndiamond " + this.ndiamond);
+    }
+
+    private void updateVide(int x,int y){
+        if(this.blocks[y - 1][x].fall == true){
+            this.updatefall(x , y - 1);
+        }
+        if( this.blocks[y - 1][x - 1].fall == true ){
+            this.updatefall(x -1, y - 1);
+        }
+        if(this.blocks[y - 1][x + 1].fall == true ){
+            this.updatefall(x  + 1, y - 1);
+        }
 
     }
+    private void updatefall(int x,int y) {
+
+        if(this.blocks[y + 1][x] instanceof Vide ){
+            this.blocks[y + 1][x] =  this.blocks[y][x];
+            this.blocks[y][x] = new Vide();
+            this.blocks[y + 1][x].falling = true;
+            this.updateVide(x,y);
+            this.updatefall(x,y + 1);
         }
+        else if( (this.blocks[y + 1][x].fall == true ) ||  this.blocks[y + 1][x] instanceof Wall) {
+
+            if (this.blocks[y][x - 1] instanceof Vide)
+                if (this.blocks[y + 1][x - 1] instanceof Vide) {
+                    this.blocks[y + 1][x - 1] = this.blocks[y][x];
+                    this.blocks[y][x] = new Vide();
+                    this.blocks[y + 1][x - 1].falling = true;
+                    this.updateVide(x, y);
+                    this.updatefall(x - 1,y + 1);
+                }
+            if (this.blocks[y][x + 1] instanceof Vide)
+                if (this.blocks[y + 1][x + 1] instanceof Vide) {
+                    this.blocks[y + 1][x + 1] = this.blocks[y][x];
+                    this.blocks[y][x] = new Vide();
+                    this.blocks[y + 1][x + 1].falling = true;
+                    this.updateVide(x, y);
+                    this.updatefall(x + 1,y + 1);
+                }
+        }
+        if( (this.blocks[y + 1][x] instanceof Player) && (this.blocks[y][x].falling))
+            System.exit(0);
+    else
+        this.blocks[y][x].falling = false;
+
+    }
+
 }

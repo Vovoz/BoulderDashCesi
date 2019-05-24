@@ -16,6 +16,7 @@ public class Wall extends Block{
         super();
         this.ximg = 0;
         this.yimg = 0;
+        this.breakable = false;
     }
 
 
@@ -30,5 +31,9 @@ public class Wall extends Block{
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    void setDirection(String direction) {
     }
 }

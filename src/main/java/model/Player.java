@@ -12,7 +12,7 @@ public class Player extends Block{
 
     public Player(){
         super();
-        this.ximg = 16;
+        this.ximg = 0;
         this.yimg = 0;
     }
 
@@ -28,5 +28,21 @@ public class Player extends Block{
             e.printStackTrace();
         }
 
+    }
+    public void setDirection(String direction) {
+        switch (direction) {
+            case "UP":
+                this.yimg = 32;
+                break;
+            case "DOWN":
+                this.yimg = 64;
+                break;
+            case "LEFT":
+                this.yimg = 16;
+                break;
+            case "RIGHT":
+                this.yimg = 48;
+                break;
+        }
     }
 }

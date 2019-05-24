@@ -10,16 +10,24 @@ public abstract class Block{
     public boolean breakable;
     public boolean lootable;
     public boolean fall;
+    public boolean falling;
     public boolean fixed;
 
     public Block() {
         setImage();
+        breakable = true;
+        lootable = false;
+        fall = false;
+        falling = false;
+        fixed = true;
     }
 
     public Image getImage() {
         return this.image;
     }
-    public abstract void setImage();
+     abstract void setImage();
+
+    abstract void setDirection(String direction);
 
 }
 
