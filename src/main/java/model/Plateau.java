@@ -23,5 +23,7 @@ public class Plateau {
                 blocks[n][i] = new Dirt();
             }
         }
+
+        blocks[7][15] = new Player();
     }
 }

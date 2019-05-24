@@ -22,7 +22,7 @@ public class Dirt extends Block{
     }
     public void setImage() {
         try {
-            this.image = ImageIO.read(new File("D:\\Prosit\\bloc 5\\projet\\JPU-BlankProject\\JPU-BlankProject\\model\\block.png"));
+            this.image = ImageIO.read(new File("D:\\Prosit\\bloc 5\\projet\\BoulderBash\\src\\main\\resources\\block.png"));
 
         } catch (IOException e) {
             e.printStackTrace();

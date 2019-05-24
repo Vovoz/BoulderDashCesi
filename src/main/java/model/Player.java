@@ -1,20 +1,18 @@
 package model;
 
-import java.awt.Image;
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
-
-
-public class Wall extends Block{
+public class Player extends Block{
 
     private Image image;
 
 
-    public Wall(){
+    public Player(){
         super();
-        this.ximg = 0;
+        this.ximg = 16;
         this.yimg = 0;
     }
 
@@ -24,7 +22,7 @@ public class Wall extends Block{
     }
     public void setImage() {
         try {
-            this.image = ImageIO.read(new File("D:\\Prosit\\bloc 5\\projet\\BoulderBash\\src\\main\\resources\\block.png"));
+            this.image = ImageIO.read(new File("D:\\Prosit\\bloc 5\\projet\\BoulderBash\\src\\main\\resources\\player.png"));
 
         } catch (IOException e) {
             e.printStackTrace();

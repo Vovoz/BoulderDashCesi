@@ -29,7 +29,7 @@ public abstract class Main {
         view.setController(controller);
 
         controller.control();
-        controller.orderPerform(ControllerOrder.English);
+        controller.orderPerform(ControllerOrder.UP);
 
         /*test */
         /* salut bb est-ce que ça marche ? */
