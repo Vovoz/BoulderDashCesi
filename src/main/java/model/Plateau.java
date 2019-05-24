@@ -5,8 +5,8 @@ public class Plateau {
 
     public Plateau() {
 
-        for (int n = 0+1; n < 15-1; n++) {
-            for (int i = 0+1; i < 32-1; i++) {
+        for (int n = 1; n < 14; n++) {
+            for (int i = 1; i < 34; i++) {
                 blocks[n][i] = new Dirt();
             }
         }
