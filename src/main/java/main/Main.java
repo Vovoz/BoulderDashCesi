@@ -30,5 +30,7 @@ public abstract class Main {
 
         controller.control();
         controller.orderPerform(ControllerOrder.English);
+
+        /*test*/
     }
 }
