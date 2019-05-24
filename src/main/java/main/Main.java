@@ -31,6 +31,6 @@ public abstract class Main {
         controller.control();
         controller.orderPerform(ControllerOrder.English);
 
-        /*test*/
+        /*test salut bb ça va ? Parce que moi ce projet il me casse les couilles */
     }
 }
