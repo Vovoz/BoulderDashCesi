@@ -26,6 +26,7 @@ public interface IModel {
 	 */
 	void loadHelloWorld(String code);
 
+	void update();
 	/**
 	 * Gets the observable.
 	 *

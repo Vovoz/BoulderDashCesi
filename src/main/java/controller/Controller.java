@@ -4,6 +4,8 @@ import contract.ControllerOrder;
 import contract.IController;
 import contract.IModel;
 import contract.IView;
+import model.Plateau;
+
 
 /**
  * The Class Controller.
@@ -16,6 +18,8 @@ public final class Controller implements IController {
 	/** The model. */
 	private IModel	model;
 
+	public Plateau	plateau;
+
 	/**
 	 * Instantiates a new controller.
 	 *
@@ -25,8 +29,8 @@ public final class Controller implements IController {
 	 *          the model
 	 */
 	public Controller(final IView view, final IModel model) {
-		this.setView(view);
-		this.setModel(model);
+		this.model = model;
+		this.plateau = new Plateau();
 	}
 
 	/**
@@ -37,58 +41,28 @@ public final class Controller implements IController {
 	 *
 	 * @see contract.IController#control()
 	 */
-	public void control() {
-		this.view.printMessage("Appuyer sur les touches 'E', 'F', 'D' ou 'I', pour afficher Hello world dans la langue d votre choix.");
-	}
 
-	/**
-     * Sets the view.
-     *
-     * @param pview
-     *            the new view
-     */
-	private void setView(final IView pview) {
-		this.view = pview;
-	}
 
-	/**
-	 * Sets the model.
-	 *
-	 * @param model
-	 *          the new model
-	 */
-	private void setModel(final IModel model) {
-		this.model = model;
-	}
-
-	/**
-     * Order perform.
-     *
-     * @param controllerOrder
-     *            the controller order
-     */
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IController#orderPerform(contract.ControllerOrder)
-	 */
 	public void orderPerform(final ControllerOrder controllerOrder) {
 		switch (controllerOrder) {
 			case UP:
-				this.model.loadHelloWorld("GB");
+				System.out.println("UP");
+				this.plateau.move("UP");
 				break;
 			case DOWN:
-				this.model.loadHelloWorld("FR");
+				System.out.println("DOWN");
+				this.plateau.move("DOWN");
 				break;
 			case LEFT:
-				this.model.loadHelloWorld("DE");
+				System.out.println("LEFT");
+				this.plateau.move("LEFT");
 				break;
 			case RIGHT:
-				this.model.loadHelloWorld("ID");
-				break;
-			default:
+				System.out.println("RIGHT");
+				this.plateau.move("RIGHT");
 				break;
 		}
+		this.model.update();
 	}
 
 }

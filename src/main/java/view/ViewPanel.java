@@ -1,5 +1,6 @@
 package view;
 
+import controller.Controller;
 import model.*;
 
 import java.awt.Graphics;
@@ -68,12 +69,19 @@ class ViewPanel extends JPanel implements Observer {
 	protected void paintComponent(final Graphics graphics) {
 		graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
 		//graphics.drawString(this.getViewFrame().getModel().getHelloWorld().getMessage(), 10, 20);
+System.out.println("flag");
+		if( this.getViewFrame().getController() != null) {
 
-		Plateau plateau = new Plateau();
-
-		for(int n=0;n<15;n++)
-			for(int i=0;i<32;i++)
-				graphics.drawImage(plateau.blocks[n][i].getImage(), i*32, n*32, i*32 + 32, n*32 +32, plateau.blocks[n][i].ximg,  plateau.blocks[n][i].yimg,  plateau.blocks[n][i].ximg + 16,  plateau.blocks[n][i].yimg + 16, this);
+			for (int n = 0; n < 15; n++)
+				for (int i = 0; i < 32; i++) {
+					graphics.drawImage(this.getViewFrame().getController().plateau.blocks[n][i].getImage(), i * 32, n * 32, i * 32 + 32, n * 32 + 32, this.getViewFrame().getController().plateau.blocks[n][i].ximg, this.getViewFrame().getController().plateau.blocks[n][i].yimg, this.getViewFrame().getController().plateau.blocks[n][i].ximg + 16, this.getViewFrame().getController().plateau.blocks[n][i].yimg + 16, this);
+				}
+		}
+		else{
+			this.updateUI();
+		}
+		System.out.println("flag");
 
 	}
+
 }

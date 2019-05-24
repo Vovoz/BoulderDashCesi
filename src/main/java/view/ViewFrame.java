@@ -7,8 +7,9 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.PanelUI;
 
-import contract.IController;
+import controller.Controller;
 import contract.IModel;
 
 /**
@@ -22,7 +23,7 @@ class ViewFrame extends JFrame implements KeyListener {
 	private IModel						model;
 
 	/** The controller. */
-	private IController				controller;
+	private Controller				controller;
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -697358409737458175L;
 
@@ -86,7 +87,7 @@ class ViewFrame extends JFrame implements KeyListener {
 	 *
 	 * @return the controller
 	 */
-	private IController getController() {
+	public Controller getController() {
 		return this.controller;
 	}
 
@@ -96,7 +97,7 @@ class ViewFrame extends JFrame implements KeyListener {
 	 * @param controller
 	 *          the new controller
 	 */
-	protected void setController(final IController controller) {
+	protected void setController(final Controller controller) {
 		this.controller = controller;
 	}
 

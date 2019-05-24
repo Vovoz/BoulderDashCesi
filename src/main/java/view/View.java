@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.SwingUtilities;
 
 import contract.ControllerOrder;
-import contract.IController;
+import controller.Controller;
 import contract.IModel;
 import contract.IView;
 
@@ -76,7 +76,11 @@ public final class View implements IView, Runnable {
 	 * @param controller
 	 *          the new controller
 	 */
-	public void setController(final IController controller) {
+	public void setController(final Controller controller) {
 		this.viewFrame.setController(controller);
 	}
+
+
+
+
 }
