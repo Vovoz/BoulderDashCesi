@@ -22,7 +22,7 @@ public class Player extends Block{
     }
     public void setImage() {
         try {
-            this.image = ImageIO.read(new File("D:\\Prosit\\bloc 5\\projet\\BoulderBash\\src\\main\\resources\\player.png"));
+            this.image = ImageIO.read(new File("player.png"));
 
         } catch (IOException e) {
             e.printStackTrace();
