@@ -24,7 +24,7 @@ public class Wall extends Block{
     }
     public void setImage() {
         try {
-            this.image = ImageIO.read(new File("D:\\Prosit\\bloc 5\\projet\\BoulderBash\\src\\main\\resources\\block.png"));
+            this.image = ImageIO.read(new File("block.png"));
 
         } catch (IOException e) {
             e.printStackTrace();
