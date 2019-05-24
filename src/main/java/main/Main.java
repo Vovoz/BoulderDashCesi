@@ -31,8 +31,5 @@ public abstract class Main {
         controller.control();
         controller.orderPerform(ControllerOrder.UP);
 
-        /*test */
-        /* salut bb est-ce que ça marche ? */
-        /*enculé de tes morts */
     }
 }
