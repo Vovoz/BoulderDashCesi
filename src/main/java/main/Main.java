@@ -33,5 +33,6 @@ public abstract class Main {
 
         /*test */
         /* salut bb est-ce que ça marche ? */
+        /*enculé de tes morts */
     }
 }
