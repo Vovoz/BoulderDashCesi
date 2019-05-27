@@ -12,8 +12,14 @@ public class Vide extends  Block{
 
     public Vide(){
         super();
-        this.ximg = 32;
-        this.yimg = 0;
+        this.ximg[0] = 32;
+        this.yimg[0] = 0;
+        this.ximg[1] =  32;
+        this.yimg[1] = 0;
+        this.ximg[2] =  32;
+        this.yimg[2] = 0;
+        this.ximg[3] =  32;
+        this.yimg[3] = 0;
     }
 
 

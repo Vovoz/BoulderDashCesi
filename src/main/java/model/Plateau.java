@@ -1,12 +1,10 @@
 package model;
 
-import java.util.Observable;
-
-public class Plateau extends Observable {
+public class Plateau {
     public  Block blocks[][] = new Block[15][32];
 
-    public int xplayer;
-    public int yplayer;
+    private int xplayer;
+    private int yplayer;
 
     public int ndiamond;
 
@@ -55,46 +53,42 @@ public class Plateau extends Observable {
         switch (direction) {
             case "UP":
                 this.blocks[yplayer][xplayer].setDirection(direction);
-        if(this.blocks[yplayer - 1][xplayer].breakable == true) {
-            if(this.blocks[yplayer - 1][xplayer].lootable == true)
+        if(this.blocks[yplayer - 1][xplayer].breakable) {
+            if(this.blocks[yplayer - 1][xplayer].lootable)
                 ndiamond++;
             this.blocks[yplayer - 1][xplayer] =  this.blocks[yplayer][xplayer];
             this.blocks[yplayer][xplayer] = new Vide();
             this.yplayer--;
-            updateVide(xplayer,yplayer + 1);
         }
         break;
         case "DOWN":
             this.blocks[yplayer][xplayer].setDirection(direction);
-            if(this.blocks[this.yplayer + 1][this.xplayer].breakable == true ) {
-                if(this.blocks[this.yplayer + 1][this.xplayer].lootable == true)
+            if(this.blocks[this.yplayer + 1][this.xplayer].breakable) {
+                if(this.blocks[this.yplayer + 1][this.xplayer].lootable)
                     this.ndiamond++;
                 this.blocks[this.yplayer + 1][this.xplayer] =  this.blocks[yplayer][xplayer];
                 this.blocks[this.yplayer][this.xplayer] = new Vide();
                 this.yplayer++;
-                updateVide(this.xplayer,this.yplayer - 1);
             }
             break;
             case "LEFT":
                 this.blocks[yplayer][xplayer].setDirection(direction);
-                if(this.blocks[this.yplayer][this.xplayer - 1].breakable == true ) {
-                    if(this.blocks[this.yplayer][this.xplayer - 1].lootable == true)
+                if(this.blocks[this.yplayer][this.xplayer - 1].breakable ) {
+                    if(this.blocks[this.yplayer][this.xplayer - 1].lootable)
                         this.ndiamond++;
                     this.blocks[this.yplayer][this.xplayer - 1] =  this.blocks[yplayer][xplayer];
                     this.blocks[this.yplayer][this.xplayer] = new Vide();
                     this.xplayer--;
-                    updateVide(this.xplayer + 1,this.yplayer );
                 }
                 break;
             case "RIGHT":
                 this.blocks[yplayer][xplayer].setDirection(direction);
-                if(this.blocks[this.yplayer][this.xplayer + 1].breakable == true ) {
-                    if(this.blocks[this.yplayer][this.xplayer + 1].lootable == true)
+                if(this.blocks[this.yplayer][this.xplayer + 1].breakable) {
+                    if(this.blocks[this.yplayer][this.xplayer + 1].lootable)
                         this.ndiamond++;
                     this.blocks[this.yplayer][this.xplayer + 1] =  this.blocks[this.yplayer][this.xplayer];
                     this.blocks[this.yplayer][this.xplayer] = new Vide();
                     this.xplayer++;
-                    updateVide(this.xplayer - 1,this.yplayer);
                 }
                 break;
         }
@@ -104,14 +98,22 @@ public class Plateau extends Observable {
         System.out.println("ndiamond " + this.ndiamond);
     }
 
+    public  void update(){
+        for (int n = 14; n >= 0; n--)
+            for (int i = 31; i >= 0; i--) {
+                if( this.blocks[n][i] instanceof Vide)
+                    updateVide(i,n);
+            }
+    }
+
     private void updateVide(int x,int y){
-        if(this.blocks[y - 1][x].fall == true){
+        if(this.blocks[y - 1][x].fall){
             this.updatefall(x , y - 1);
         }
-        if( this.blocks[y - 1][x - 1].fall == true ){
+        if( this.blocks[y - 1][x - 1].fall){
             this.updatefall(x -1, y - 1);
         }
-        if(this.blocks[y - 1][x + 1].fall == true ){
+        if(this.blocks[y - 1][x + 1].fall){
             this.updatefall(x  + 1, y - 1);
         }
 
@@ -122,26 +124,22 @@ public class Plateau extends Observable {
             this.blocks[y + 1][x] =  this.blocks[y][x];
             this.blocks[y][x] = new Vide();
             this.blocks[y + 1][x].falling = true;
-            this.updateVide(x,y);
+            //this.updateVide(x,y);
             //this.updatefall(x,y + 1);
         }
-        else if( (this.blocks[y + 1][x].fall == true ) ||  this.blocks[y + 1][x] instanceof Wall) {
+        else if( this.blocks[y + 1][x].fall ||  this.blocks[y + 1][x] instanceof Wall) {
 
             if (this.blocks[y][x - 1] instanceof Vide)
                 if (this.blocks[y + 1][x - 1] instanceof Vide) {
                     this.blocks[y + 1][x - 1] = this.blocks[y][x];
                     this.blocks[y][x] = new Vide();
                     this.blocks[y + 1][x - 1].falling = true;
-                    this.updateVide(x, y);
-                    //this.updatefall(x - 1,y + 1);
                 }
             if (this.blocks[y][x + 1] instanceof Vide)
                 if (this.blocks[y + 1][x + 1] instanceof Vide) {
                     this.blocks[y + 1][x + 1] = this.blocks[y][x];
                     this.blocks[y][x] = new Vide();
                     this.blocks[y + 1][x + 1].falling = true;
-                    this.updateVide(x, y);
-                    //this.updatefall(x + 1,y + 1);
                 }
         }
         if( (this.blocks[y + 1][x] instanceof Player) && (this.blocks[y][x].falling))

@@ -11,8 +11,17 @@ public class Diamond extends Block{
 
     public Diamond(){
         super();
-        this.ximg = 64;
-        this.yimg = 0;
+        this.ximg[0] = 64;
+        this.yimg[0] = 0;
+        this.ximg[1] = 64;
+        this.yimg[1] = 16;
+        this.ximg[2] = 64;
+        this.yimg[2] = 32;
+        this.ximg[3] = 64;
+        this.yimg[3] = 48;
+
+
+
         this.lootable = true;
         this.fall = true;
     }

@@ -39,7 +39,7 @@ public final class Controller implements IController{
 		this.model = model;
 		this.plateau = new Plateau();
 
-		Timer t = new Timer(1000, new Ticker());
+		Timer t = new Timer(400, new Ticker(this));
 		t.start();
 	}
 
@@ -72,10 +72,20 @@ public final class Controller implements IController{
 		}
 		this.model.update();
 	}
+	public void update(){
+		this.plateau.update();
+		this.model.update();
+	}
 }
+
 
 class Ticker implements ActionListener {
 	private boolean tick = true;
+	private Controller controller;
+
+	public Ticker(Controller controller){
+		this.controller = controller;
+	}
 
 	public void actionPerformed(ActionEvent event) {
 		if (tick) {
@@ -84,7 +94,6 @@ class Ticker implements ActionListener {
 			System.out.println("Tock...");
 		}
 		tick = !tick;
-		Model model = new Model();
-		model.update();
+		controller.update();
 	}
 }

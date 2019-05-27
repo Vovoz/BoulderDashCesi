@@ -26,6 +26,8 @@ class ViewPanel extends JPanel implements Observer {
 
 	private Image diamondImage;
 
+	private int nsprite = 0;
+
 	/**
 	 * Instantiates a new view panel.
 	 *
@@ -88,8 +90,11 @@ class ViewPanel extends JPanel implements Observer {
 
 			for (int n = 0; n < 15; n++)
 				for (int i = 0; i < 32; i++) {
-					graphics.drawImage(this.getViewFrame().getController().plateau.blocks[n][i].getImage(), i * 32, n * 32, i * 32 + 32, n * 32 + 32, this.getViewFrame().getController().plateau.blocks[n][i].ximg, this.getViewFrame().getController().plateau.blocks[n][i].yimg, this.getViewFrame().getController().plateau.blocks[n][i].ximg + 16, this.getViewFrame().getController().plateau.blocks[n][i].yimg + 16, this);
+					graphics.drawImage(this.getViewFrame().getController().plateau.blocks[n][i].getImage(), i * 32, n * 32, i * 32 + 32, n * 32 + 32, this.getViewFrame().getController().plateau.blocks[n][i].ximg[nsprite], this.getViewFrame().getController().plateau.blocks[n][i].yimg[nsprite], this.getViewFrame().getController().plateau.blocks[n][i].ximg[nsprite] + 16, this.getViewFrame().getController().plateau.blocks[n][i].yimg[nsprite] + 16, this);
 				}
+			nsprite++;
+			if(nsprite == 4)
+				nsprite = 0;
 			graphics.drawImage(diamondImage,1,1,this);
 			graphics.drawString("" + this.getViewFrame().getController().plateau.ndiamond, 70, 45);
 		}
