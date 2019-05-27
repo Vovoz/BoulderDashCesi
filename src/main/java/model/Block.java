@@ -17,7 +17,7 @@ public abstract class Block{
         ximg = new int[4];
         yimg = new int[4];
         setImage();
-        setLevel(6);
+        setLevel(3);
         breakable = true;
         lootable = false;
         fall = false;

@@ -28,6 +28,8 @@ class ViewPanel extends JPanel implements Observer {
 
 	private int nsprite = 0;
 
+
+	public final int tailleB = 64;
 	/**
 	 * Instantiates a new view panel.
 	 *
@@ -88,9 +90,20 @@ class ViewPanel extends JPanel implements Observer {
 		System.out.println("update");
 		if( this.getViewFrame().getController() != null) {
 
+
+			int x;
+			int y;
+			x =this.getViewFrame().getController().plateau.xplayer * this.tailleB / 2;
+			y =this.getViewFrame().getController().plateau.yplayer * this.tailleB / 2;
+
 			for (int n = 0; n < 15; n++)
 				for (int i = 0; i < 32; i++) {
-					graphics.drawImage(this.getViewFrame().getController().plateau.blocks[n][i].getImage(), i * 32, n * 32, i * 32 + 32, n * 32 + 32, this.getViewFrame().getController().plateau.blocks[n][i].ximg[nsprite], this.getViewFrame().getController().plateau.blocks[n][i].yimg[nsprite], this.getViewFrame().getController().plateau.blocks[n][i].ximg[nsprite] + 16, this.getViewFrame().getController().plateau.blocks[n][i].yimg[nsprite] + 16, this);
+					graphics.drawImage(this.getViewFrame().getController().plateau.blocks[n][i].getImage(),
+							i * tailleB - x, n * tailleB - y, i * tailleB + tailleB - x, n * tailleB + tailleB - y,
+							this.getViewFrame().getController().plateau.blocks[n][i].ximg[nsprite],
+							this.getViewFrame().getController().plateau.blocks[n][i].yimg[nsprite],
+							this.getViewFrame().getController().plateau.blocks[n][i].ximg[nsprite] + 16,
+							this.getViewFrame().getController().plateau.blocks[n][i].yimg[nsprite] + 16, this);
 				}
 			nsprite++;
 			if(nsprite == 4)

@@ -3,8 +3,8 @@ package model;
 public class Plateau {
     public  Block blocks[][] = new Block[15][32];
 
-    private int xplayer;
-    private int yplayer;
+    public int xplayer;
+    public int yplayer;
 
     public int ndiamond;
 
@@ -50,58 +50,48 @@ public class Plateau {
     }
 
     public void move(String direction){
+        int x = 0;
+        int y = 0;
         switch (direction) {
             case "UP":
-                this.blocks[yplayer][xplayer].setDirection(direction);
-        if(this.blocks[yplayer - 1][xplayer].breakable) {
-            if(this.blocks[yplayer - 1][xplayer].lootable)
-                ndiamond++;
-            this.blocks[yplayer - 1][xplayer] =  this.blocks[yplayer][xplayer];
-            this.blocks[yplayer][xplayer] = new Vide();
-            this.yplayer--;
-        }
-        break;
-        case "DOWN":
-            this.blocks[yplayer][xplayer].setDirection(direction);
-            if(this.blocks[this.yplayer + 1][this.xplayer].breakable) {
-                if(this.blocks[this.yplayer + 1][this.xplayer].lootable)
-                    this.ndiamond++;
-                this.blocks[this.yplayer + 1][this.xplayer] =  this.blocks[yplayer][xplayer];
-                this.blocks[this.yplayer][this.xplayer] = new Vide();
-                this.yplayer++;
-            }
-            break;
+                y = -1;
+                break;
+            case "DOWN":
+                y = 1;
+                break;
             case "LEFT":
-                this.blocks[yplayer][xplayer].setDirection(direction);
-                if(this.blocks[this.yplayer][this.xplayer - 1].breakable ) {
-                    if(this.blocks[this.yplayer][this.xplayer - 1].lootable)
-                        this.ndiamond++;
-                    this.blocks[this.yplayer][this.xplayer - 1] =  this.blocks[yplayer][xplayer];
-                    this.blocks[this.yplayer][this.xplayer] = new Vide();
-                    this.xplayer--;
-                }
-                break;
+               x = -1;
+               break;
             case "RIGHT":
-                this.blocks[yplayer][xplayer].setDirection(direction);
-                if(this.blocks[this.yplayer][this.xplayer + 1].breakable) {
-                    if(this.blocks[this.yplayer][this.xplayer + 1].lootable)
-                        this.ndiamond++;
-                    this.blocks[this.yplayer][this.xplayer + 1] =  this.blocks[this.yplayer][this.xplayer];
-                    this.blocks[this.yplayer][this.xplayer] = new Vide();
-                    this.xplayer++;
-                }
-                break;
+               x = 1;
+               break;
         }
-        System.out.println("x " + this.xplayer);
-        System.out.println("y " + this.yplayer);
 
-        System.out.println("ndiamond " + this.ndiamond);
+
+        this.blocks[yplayer][xplayer].setDirection(direction);
+        if(this.blocks[yplayer + y][xplayer + x].breakable)
+        {
+        if (this.blocks[yplayer + y][xplayer + x].lootable)
+            ndiamond++;
+        this.blocks[yplayer + y][xplayer + x] = this.blocks[yplayer][xplayer];
+        this.blocks[yplayer][xplayer] = new Vide();
+        this.yplayer+=y;
+        this.xplayer+=x;
+        }
+        else
+            if( y == 0 && (this.blocks[yplayer][xplayer + x] instanceof  Rock))
+                 if(this.blocks[yplayer][xplayer + x * 2] instanceof Vide){
+                    this.blocks[yplayer ][xplayer + x * 2] = this.blocks[yplayer ][xplayer + x];
+                    this.blocks[yplayer][xplayer + x] = this.blocks[yplayer][xplayer];
+                    this.blocks[yplayer][xplayer] = new Vide();
+                    this.xplayer+=x;
+            }
     }
 
     public  void update(){
         for (int n = 14; n >= 0; n--)
             for (int i = 31; i >= 0; i--) {
-                if( this.blocks[n][i] instanceof Vide)
+                if( (this.blocks[n][i] instanceof Vide) || (this.blocks[n][i] instanceof Player) )
                     updateVide(i,n);
             }
     }
@@ -124,25 +114,28 @@ public class Plateau {
             this.blocks[y + 1][x] = this.blocks[y][x];
             this.blocks[y][x] = new Vide();
             this.blocks[y + 1][x].falling = true;
+            return;
         }
-        else if( this.blocks[y + 1][x].fall ||  this.blocks[y + 1][x] instanceof Wall) {
+        if( this.blocks[y + 1][x].fall ||  this.blocks[y + 1][x] instanceof Wall) {
 
             if (this.blocks[y][x - 1] instanceof Vide)
                 if (this.blocks[y + 1][x - 1] instanceof Vide) {
                     this.blocks[y + 1][x - 1] = this.blocks[y][x];
                     this.blocks[y][x] = new Vide();
                     this.blocks[y + 1][x - 1].falling = true;
+                    return;
                 }
             if (this.blocks[y][x + 1] instanceof Vide)
                 if (this.blocks[y + 1][x + 1] instanceof Vide) {
                     this.blocks[y + 1][x + 1] = this.blocks[y][x];
                     this.blocks[y][x] = new Vide();
                     this.blocks[y + 1][x + 1].falling = true;
+                    return;
                 }
         }
         if( (this.blocks[y + 1][x] instanceof Player) && (this.blocks[y][x].falling))
             System.exit(0);
-    else
+
         this.blocks[y][x].falling = false;
 
     }
