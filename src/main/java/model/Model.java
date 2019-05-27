@@ -11,7 +11,7 @@ import entity.HelloWorld;
  *
  * @author Jean-Aymeric Diet
  */
-public final class Model extends Observable implements IModel {
+public final class Model extends Observable implements IModel{
 
 	/** The helloWorld. */
 	private HelloWorld helloWorld;
