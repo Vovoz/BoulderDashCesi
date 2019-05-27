@@ -24,7 +24,7 @@ public interface IModel {
 	 * @param code
 	 *          the code
 	 */
-	void loadHelloWorld(String code);
+	//void loadHelloWorld(String code);
 
 	void update();
 	/**
