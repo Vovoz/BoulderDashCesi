@@ -8,7 +8,7 @@ public class Plateau extends Observable {
     public int xplayer;
     public int yplayer;
 
-    private int ndiamond;
+    public int ndiamond;
 
     public Plateau() {
 

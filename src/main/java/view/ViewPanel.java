@@ -3,11 +3,14 @@ package view;
 import controller.Controller;
 import model.*;
 
-import java.awt.Graphics;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JPanel;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 
 /**
  * The Class ViewPanel.
@@ -21,6 +24,8 @@ class ViewPanel extends JPanel implements Observer {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -998294702363713521L;
 
+	private Image diamondImage;
+
 	/**
 	 * Instantiates a new view panel.
 	 *
@@ -30,6 +35,12 @@ class ViewPanel extends JPanel implements Observer {
 	public ViewPanel(final ViewFrame viewFrame) {
 		this.setViewFrame(viewFrame);
 		viewFrame.getModel().getObservable().addObserver(this);
+		try {
+			this.diamondImage = ImageIO.read(new File("Diamond_Bar.png"));
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -68,19 +79,23 @@ class ViewPanel extends JPanel implements Observer {
 	@Override
 	protected void paintComponent(final Graphics graphics) {
 		graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
-		//graphics.drawString(this.getViewFrame().getModel().getHelloWorld().getMessage(), 10, 20);
-System.out.println("flag");
+		Font fonte = new Font(" TimesRoman ",Font.BOLD,30);
+		graphics.setFont(fonte);
+		graphics.setColor(Color.white);
+
+		System.out.println("update");
 		if( this.getViewFrame().getController() != null) {
 
 			for (int n = 0; n < 15; n++)
 				for (int i = 0; i < 32; i++) {
 					graphics.drawImage(this.getViewFrame().getController().plateau.blocks[n][i].getImage(), i * 32, n * 32, i * 32 + 32, n * 32 + 32, this.getViewFrame().getController().plateau.blocks[n][i].ximg, this.getViewFrame().getController().plateau.blocks[n][i].yimg, this.getViewFrame().getController().plateau.blocks[n][i].ximg + 16, this.getViewFrame().getController().plateau.blocks[n][i].yimg + 16, this);
 				}
+			graphics.drawImage(diamondImage,1,1,this);
+			graphics.drawString("" + this.getViewFrame().getController().plateau.ndiamond, 70, 45);
 		}
 		else{
 			this.updateUI();
 		}
-		System.out.println("flag");
 
 	}
 
