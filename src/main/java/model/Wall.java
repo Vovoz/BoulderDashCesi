@@ -14,14 +14,9 @@ public class Wall extends Block{
 
     public Wall(){
         super();
-        this.ximg[0] = 0;
-        this.yimg[0] = 0;
-        this.ximg[1] =  0;
-        this.yimg[1] = 0;
-        this.ximg[2] =  0;
-        this.yimg[2] = 0;
-        this.ximg[3] =  0;
-        this.yimg[3] = 0;
+        for(int n=0;n<4;n++)
+            this.ximg[n] = 0;
+
 
         this.breakable = false;
     }
@@ -41,6 +36,9 @@ public class Wall extends Block{
     }
 
     @Override
-    void setDirection(String direction) {
+    public void setLevel(int level) {
+        for(int n=0;n<4;n++)
+            this.yimg[n] =( level - 1) * 64;
+
     }
 }

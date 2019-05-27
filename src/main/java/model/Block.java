@@ -17,6 +17,7 @@ public abstract class Block{
         ximg = new int[4];
         yimg = new int[4];
         setImage();
+        setLevel(6);
         breakable = true;
         lootable = false;
         fall = false;
@@ -29,7 +30,11 @@ public abstract class Block{
     }
      abstract void setImage();
 
-    abstract void setDirection(String direction);
+    public void setLevel(int level){
+        for(int n=0;n<4;n++)
+            this.yimg[n] = (level - 1 ) * 64 + 16 * n;
+    }
+    public void setDirection(String direction){}
 
 }
 

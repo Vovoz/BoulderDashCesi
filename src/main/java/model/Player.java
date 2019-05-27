@@ -12,14 +12,13 @@ public class Player extends Block{
 
     public Player(){
         super();
-        this.ximg[0] = 0;
-        this.yimg[0] = 0;
-        this.ximg[1] =  16;
-        this.yimg[1] = 0;
-        this.ximg[2] =  0;
-        this.yimg[2] = 0;
-        this.ximg[3] =  16;
-        this.yimg[3] = 0;
+        for(int n=0;n<2;n++)
+            this.ximg[n] = 0;
+        for(int n=2;n<4;n++)
+            this.ximg[n] = 16;
+        for(int n=0;n<4;n++)
+            this.yimg[n] = 0;
+
     }
 
 
@@ -35,38 +34,25 @@ public class Player extends Block{
         }
 
     }
+
     public void setDirection(String direction) {
+        int y = 0;
         switch (direction) {
             case "UP":
-                this.yimg[0] = 32;
-                this.yimg[1] = 32;
-                this.yimg[2] = 32;
-                this.yimg[3] = 32;
+                y=32;
                 break;
             case "DOWN":
-                this.yimg[0] = 64;
-                this.yimg[1] = 64;
-                this.yimg[2] = 64;
-                this.yimg[3] = 64;
+                y=64;
                 break;
             case "LEFT":
-                this.yimg[0] = 16;
-                this.yimg[1] = 16;
-                this.yimg[2] = 16;
-                this.yimg[3] = 16;
+                y=16;
                 break;
             case "RIGHT":
-                this.yimg[0] = 48;
-                this.yimg[1] = 48;
-                this.yimg[2] = 48;
-                this.yimg[3] = 48;
+                y=48;
                 break;
 
-                default:
-                    this.yimg[0] = 0;
-                    this.yimg[1] = 0;
-                    this.yimg[2] = 0;
-                    this.yimg[3] = 0;
         }
+        for(int n=0;n<4;n++)
+            this.yimg[n] = y;
     }
 }

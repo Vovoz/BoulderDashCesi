@@ -12,14 +12,8 @@ public class Dirt extends Block{
 
     public Dirt(){
         super();
-        this.ximg[0] = 16;
-        this.yimg[0] = 0;
-        this.ximg[1] =  this.ximg[0];
-        this.yimg[1] = this.yimg[0];
-        this.ximg[2] =  this.ximg[0];
-        this.yimg[2] = this.yimg[0];
-        this.ximg[3] =  this.ximg[0];
-        this.yimg[3] = this.yimg[0];
+        for(int n=0;n<4;n++)
+            this.ximg[n] = 16;
     }
 
 
@@ -37,6 +31,13 @@ public class Dirt extends Block{
     }
 
     @Override
-    void setDirection(String direction) {
+    public void setLevel(int level) {
+        if(level < 3 || level == 4) {
+            for(int n=0;n<4;n++)
+                this.yimg[n] = (level - 1) * 64;
+        }
+        else
+            for(int n=0;n<4;n++)
+                this.yimg[n] = (level - 1 ) * 64 + 16 * n;
     }
 }

@@ -10,14 +10,9 @@ public class Rock extends Block {
 
     public Rock(){
         super();
-        this.ximg[0] = 48;
-        this.yimg[0] = 0;
-        this.ximg[1] =  48;
-        this.yimg[1] = 16;
-        this.ximg[2] =  48;
-        this.yimg[2] = 32;
-        this.ximg[3] =  48;
-        this.yimg[3] = 48;
+        for(int n=0;n<4;n++)
+            this.ximg[n] = 48;
+
 
         this.breakable = false;
         this.fall = true;
@@ -36,8 +31,14 @@ public class Rock extends Block {
         }
 
     }
-
     @Override
-    void setDirection(String direction) {
+    public void setLevel(int level){
+        if(level == 5)
+            for (int n=0;n<4;n++)
+                this.yimg[n] = (level - 1 )* 64;
+
+        else
+            for(int n=0;n<4;n++)
+                this.yimg[n] = (level - 1 ) * 64 + 16 * n;
     }
 }
