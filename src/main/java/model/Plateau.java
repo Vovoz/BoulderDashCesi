@@ -123,7 +123,7 @@ public class Plateau extends Observable {
             this.blocks[y][x] = new Vide();
             this.blocks[y + 1][x].falling = true;
             this.updateVide(x,y);
-            this.updatefall(x,y + 1);
+            //this.updatefall(x,y + 1);
         }
         else if( (this.blocks[y + 1][x].fall == true ) ||  this.blocks[y + 1][x] instanceof Wall) {
 
@@ -133,7 +133,7 @@ public class Plateau extends Observable {
                     this.blocks[y][x] = new Vide();
                     this.blocks[y + 1][x - 1].falling = true;
                     this.updateVide(x, y);
-                    this.updatefall(x - 1,y + 1);
+                    //this.updatefall(x - 1,y + 1);
                 }
             if (this.blocks[y][x + 1] instanceof Vide)
                 if (this.blocks[y + 1][x + 1] instanceof Vide) {
@@ -141,7 +141,7 @@ public class Plateau extends Observable {
                     this.blocks[y][x] = new Vide();
                     this.blocks[y + 1][x + 1].falling = true;
                     this.updateVide(x, y);
-                    this.updatefall(x + 1,y + 1);
+                    //this.updatefall(x + 1,y + 1);
                 }
         }
         if( (this.blocks[y + 1][x] instanceof Player) && (this.blocks[y][x].falling))
