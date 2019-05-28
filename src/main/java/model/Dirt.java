@@ -10,8 +10,8 @@ public class Dirt extends Block{
     private Image image;
 
 
-    public Dirt(){
-        super();
+    public Dirt(final int level){
+        super(level);
         for(int n=0;n<4;n++)
             this.ximg[n] = 16;
     }

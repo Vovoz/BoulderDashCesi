@@ -8,8 +8,8 @@ import java.io.IOException;
 public class Rock extends Block {
     private Image image;
 
-    public Rock(){
-        super();
+    public Rock(final int level){
+        super(level);
         for(int n=0;n<4;n++)
             this.ximg[n] = 48;
 

@@ -10,8 +10,9 @@ public interface IView {
 	/**
 	 * Prints the message.
 	 *
-	 * @param message
+	 * @param messagelevel
+	 * @param messagemap
 	 *          the message
 	 */
-	void printMessage(final String message);
+	void printMessage(final String messagelevel,final String messagemap);
 }

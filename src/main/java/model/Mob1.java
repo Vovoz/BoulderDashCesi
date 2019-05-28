@@ -9,8 +9,8 @@ public class Mob1 extends Mob{
 
     private Image image;
 
-    public Mob1(){
-        super();
+    public Mob1(final int level){
+        super(level);
         for(int n=0;n<4;n++)
             this.ximg[n] = 144;
     }

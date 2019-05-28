@@ -15,11 +15,11 @@ public abstract class Block{
     protected boolean fixed;
     protected boolean update;
 
-    public Block() {
+    public Block(final int level) {
         ximg = new int[4];
         yimg = new int[4];
         setImage();
-        setLevel(4);
+        setLevel(level);
         breakable = true;
         lootable = false;
         fall = false;

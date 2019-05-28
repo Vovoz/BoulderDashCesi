@@ -36,13 +36,18 @@ public final class Controller implements IController{
 	 * @param model the model
 	 */
 	public Controller(final IView view, final IModel model) {
+		this.setView(view);
 		this.model = model;
-		this.plateau = new Plateau(32,15);
+
+	}
+
+
+	public void buildPlateau(final int map,final int level){
+		this.plateau = new Plateau(32,15,level);
 
 		Timer t = new Timer(10, new Ticker(this));
 		t.start();
 	}
-
 	/**
 	 * Control.
 	 */
@@ -51,6 +56,13 @@ public final class Controller implements IController{
 	 *
 	 * @see contract.IController#control()
 	 */
+	public void control() {
+		this.view.printMessage("Choose a level 1-6","Choose a map 1-5");
+	}
+	private void setView(final IView pview) {
+		this.view = pview;
+	}
+
 	public void orderPerform(final ControllerOrder controllerOrder) {
 		switch (controllerOrder) {
 			case UP:

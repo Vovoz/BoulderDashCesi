@@ -10,8 +10,8 @@ public class Player extends Block{
     private Image image;
 
 
-    public Player(){
-        super();
+    public Player(final int level){
+        super(level);
         for(int n=0;n<2;n++)
             this.ximg[n] = 0;
         for(int n=2;n<4;n++)

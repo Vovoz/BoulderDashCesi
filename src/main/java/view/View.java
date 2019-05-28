@@ -12,7 +12,7 @@ import contract.IView;
 /**
  * The Class View.
  *
- * @author alexis
+ * @author Alexis
  */
 public final class View implements IView, Runnable {
 
@@ -57,8 +57,8 @@ public final class View implements IView, Runnable {
 	 *
 	 * @see contract.IView#printMessage(java.lang.String)
 	 */
-	public void printMessage(final String message) {
-		this.viewFrame.printMessage(message);
+	public void printMessage(final String messagelevel,final String messagemap) {
+		this.viewFrame.printMessage(messagelevel,messagemap);
 	}
 
 	/*

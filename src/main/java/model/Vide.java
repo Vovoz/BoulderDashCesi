@@ -10,8 +10,8 @@ public class Vide extends  Block{
     private Image image;
 
 
-    public Vide(){
-        super();
+    public Vide(final int level){
+        super(level);
         for(int n=0;n<4;n++)
             this.ximg[n] = 32;
 

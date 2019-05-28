@@ -139,12 +139,13 @@ class ViewFrame extends JFrame implements KeyListener {
 	/**
 	 * Prints the message.
 	 *
-	 * @param message
+	 * @param messagelevel
+	 * @param messagemap
 	 *          the message
 	 */
-	public void printMessage(final String message) {
-		JOptionPane.showMessageDialog(null, message);
-	}
+	public void printMessage(final String messagelevel,final String messagemap) {
+		this.getController().buildPlateau( Integer.parseInt(JOptionPane.showInputDialog(messagemap)), Integer.parseInt(JOptionPane.showInputDialog(messagelevel) ));
+		}
 
 	/*
 	 * (non-Javadoc)
