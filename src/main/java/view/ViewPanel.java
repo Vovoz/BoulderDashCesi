@@ -1,8 +1,5 @@
 package view;
 
-import controller.Controller;
-import model.*;
-
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +8,7 @@ import java.util.Observer;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
 
 /**
  * The Class ViewPanel.
@@ -87,26 +85,24 @@ class ViewPanel extends JPanel implements Observer {
 		graphics.setFont(fonte);
 		graphics.setColor(Color.white);
 
-		System.out.println("update");
+		System.out.println("...");
 		if( this.getViewFrame().getController() != null) {
-
 
 			int x;
 			int y;
-			x =this.getViewFrame().getController().plateau.xplayer * this.tailleB / 2;
-			y =this.getViewFrame().getController().plateau.yplayer * this.tailleB / 2;
-
-			for (int n = 0; n < 15; n++)
-				for (int i = 0; i < 32; i++) {
+			x =this.getViewFrame().getController().plateau.xplayer * this.tailleB / 3;
+			y = this.getViewFrame().getController().plateau.yplayer * this.tailleB / 3;
+			for (int n = 0; n < this.getViewFrame().getController().plateau.ymax; n++)
+				for (int i = 0; i < this.getViewFrame().getController().plateau.xmax; i++) {
 					graphics.drawImage(this.getViewFrame().getController().plateau.blocks[n][i].getImage(),
 							i * tailleB - x, n * tailleB - y, i * tailleB + tailleB - x, n * tailleB + tailleB - y,
-							this.getViewFrame().getController().plateau.blocks[n][i].ximg[nsprite],
-							this.getViewFrame().getController().plateau.blocks[n][i].yimg[nsprite],
-							this.getViewFrame().getController().plateau.blocks[n][i].ximg[nsprite] + 16,
-							this.getViewFrame().getController().plateau.blocks[n][i].yimg[nsprite] + 16, this);
+							this.getViewFrame().getController().plateau.blocks[n][i].ximg[nsprite / 10],
+							this.getViewFrame().getController().plateau.blocks[n][i].yimg[nsprite / 10],
+							this.getViewFrame().getController().plateau.blocks[n][i].ximg[nsprite / 10] + 16,
+							this.getViewFrame().getController().plateau.blocks[n][i].yimg[nsprite / 10] + 16, this);
 				}
 			nsprite++;
-			if(nsprite == 4)
+			if(nsprite == 40)
 				nsprite = 0;
 			graphics.drawImage(diamondImage,1,1,this);
 			graphics.drawString("" + this.getViewFrame().getController().plateau.ndiamond, 70, 45);
