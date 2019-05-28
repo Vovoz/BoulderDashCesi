@@ -3,7 +3,7 @@ package dao;
 import java.util.ArrayList;
 import  java.util.Optional;
 
-public class IMap {
+public interface IMap {
 
     Optional<Object> getMap(final String nameMap);
 

@@ -1,8 +1,11 @@
 package dao;
 
 import com.sun.org.apache.bcel.internal.generic.ObjectType;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import jdk.nashorn.internal.ir.Optimistic;
 
 import javax.lang.model.element.TypeParameterElement;
+import javax.xml.crypto.Data;
 import java.lang.reflect.Array;
 import java.lang.reflect.Parameter;
 import java.sql.*;
@@ -167,12 +170,60 @@ public class MapDAO implements IMap {
                             break;
 
                         case OUT:
-                            if(parameter.getParameter() instanceof )
+                            if(parameter.getParameter() instanceof Integer) {
+                                callableStatement.registerOutParameter(i, Types.INTEGER);
+                            }
+
+                            else if(parameter.getParameter() instanceof String) {
+                                callableStatement.registerOutParameter(i, Types.VARCHAR);
+                            }
+
+                            else if(parameter.getParameter() instanceof Double) {
+                                callableStatement.registerOutParameter(i, Types.DOUBLE);
+                            }
+
+                            else if(parameter.getParameter() instanceof Boolean) {
+                                callableStatement.registerOutParameter(i, Types.BOOLEAN);
+                            }
+
+                            else if(parameter.getParameter() instanceof Date) {
+                                callableStatement.registerOutParameter(i, Types.DATE);
+                            }
+
+                            break;
+
+                        case INOUT:
+                            break;
                     }
+                    i++;
                 }
+                return Optional.of(callableStatement);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Optional.empty();
         }
     }
 
+    public static void executeCallStatement(final CallableStatement callableStatement){
+        try {
+            callableStatement.execute();
+            statement = callableStatement;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optinal.empty();
+    }
 
+    public static void  closeStatement(){
+        try {
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public final Connection getConnection() {
+        return connection:
+    }
+    
 }
