@@ -15,6 +15,6 @@ public interface IMap {
 
     void addObjectType(final objectType);
 
-    void removeObjectType(fianl ObjectType objectType);
+    void removeObjectType(final ObjectType objectType);
 
 }
