@@ -11,4 +11,32 @@ public class Dao {
 
     private final static String user = "java";
 
+    private  final static String passwd = "test123";
+
+    private static Connection connection = null;
+    private static Dao dao = null;
+
+    private Dao() {
+        try {
+            connection = DriverManager.getConnection(url, user, passwd);
+        } catch (SQLException e) {
+            System.err.println("IL FAUT VERIFIER LES PARAMETRES DE CONNEXION");
+            e.printStackTrace();
+        }
+    }
+
+    public static Dao getInstance(){
+        if(dao == null){
+            synchronized (Dao.class){
+                if(dao == null) {
+                    new Dao();
+                }
+            }
+        }
+        return dao;
+    }
+
+    public Connection getConnection(){
+        return connection;
+    }
 }
