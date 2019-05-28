@@ -35,6 +35,7 @@ public class Player extends Block{
 
     }
 
+     @Override
     public void setDirection(String direction) {
         int y = 0;
         switch (direction) {

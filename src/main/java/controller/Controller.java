@@ -25,7 +25,7 @@ public final class Controller implements IController{
 	/**
 	 * The model.
 	 */
-	private IModel model;
+	public IModel model;
 
 	public Plateau plateau;
 
@@ -37,9 +37,9 @@ public final class Controller implements IController{
 	 */
 	public Controller(final IView view, final IModel model) {
 		this.model = model;
-		this.plateau = new Plateau();
+		this.plateau = new Plateau(32,15);
 
-		Timer t = new Timer(400, new Ticker(this));
+		Timer t = new Timer(10, new Ticker(this));
 		t.start();
 	}
 
@@ -55,39 +55,45 @@ public final class Controller implements IController{
 		switch (controllerOrder) {
 			case UP:
 				System.out.println("UP");
-				this.plateau.move("UP");
+				this.plateau.movePlayer("UP");
 				break;
 			case DOWN:
 				System.out.println("DOWN");
-				this.plateau.move("DOWN");
+				this.plateau.movePlayer("DOWN");
 				break;
 			case LEFT:
 				System.out.println("LEFT");
-				this.plateau.move("LEFT");
+				this.plateau.movePlayer("LEFT");
 				break;
 			case RIGHT:
 				System.out.println("RIGHT");
-				this.plateau.move("RIGHT");
+				this.plateau.movePlayer("RIGHT");
 				break;
 		}
-		this.model.update();
-	}
-	public void update(){
-		this.plateau.update();
-		this.model.update();
 	}
 }
 
 
 class Ticker implements ActionListener {
-	private boolean tick = true;
 	private Controller controller;
+	private  int n;
 
 	public Ticker(Controller controller){
 		this.controller = controller;
+		n = 0;
 	}
 
 	public void actionPerformed(ActionEvent event) {
-		controller.update();
+		if(n%20 == 0)
+			this.controller.plateau.update();
+
+
+		if(n%3 == 0)
+			this.controller.model.update();
+
+		n++;
+
+		if(n == 1000)
+			n = 0;
 	}
 }
