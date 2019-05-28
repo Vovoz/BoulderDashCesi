@@ -21,10 +21,10 @@ public class Player extends Block{
 
     }
 
-
     public Image getImage() {
         return this.image;
     }
+    @Override
     public void setImage() {
         try {
             this.image = ImageIO.read(new File("player.png"));

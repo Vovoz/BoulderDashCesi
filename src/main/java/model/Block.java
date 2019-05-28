@@ -1,6 +1,9 @@
 package model;
 
+import javax.imageio.ImageIO;
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 
 public abstract class Block{
     private Image image;
@@ -32,8 +35,14 @@ public abstract class Block{
     public Image getImage() {
         return this.image;
     }
-     abstract void setImage();
+    public void setImage() {
+        try {
+            this.image = ImageIO.read(new File( "block.png" ));
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public void setLevel(int level){
         for(int n=0;n<4;n++)
             this.yimg[n] = (level - 1 ) * 64 + 16 * n;

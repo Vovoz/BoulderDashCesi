@@ -1,14 +1,6 @@
 package model;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-
 public class FinalBlock extends Block{
-
-    private Image image;
-
 
     public FinalBlock(final int level){
         super(level);
@@ -19,16 +11,4 @@ public class FinalBlock extends Block{
         this.breakable = false;
     }
 
-
-    public Image getImage() {
-        return this.image;
-    }
-    public void setImage() {
-        try {
-            this.image = ImageIO.read(new File("block.png"));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
