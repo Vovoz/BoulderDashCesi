@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 public interface IMap {
-
+/*
     Optional<Object> getMap(final String nameMap);
 
     void addMap(final RawMap rawMap);
@@ -16,5 +16,5 @@ public interface IMap {
     void addObjectType(final objectType);
 
     void removeObjectType(final ObjectType objectType);
-
+*/
 }

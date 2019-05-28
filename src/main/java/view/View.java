@@ -12,7 +12,7 @@ import contract.IView;
 /**
  * The Class View.
  *
- * @author Jean-Aymeric Diet
+ * @author alexis
  */
 public final class View implements IView, Runnable {
 
@@ -28,7 +28,7 @@ public final class View implements IView, Runnable {
 	public View(final IModel model) {
 		this.viewFrame = new ViewFrame(model);
 		SwingUtilities.invokeLater(this);
-	}
+}
 
 	/**
 	 * Key code to controller order.

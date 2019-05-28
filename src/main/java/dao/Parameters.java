@@ -1,5 +1,5 @@
 package dao;
-
+/*
 public class Parameters<T> {
 
     private T obj;
@@ -22,3 +22,4 @@ public class Parameters<T> {
         return typeParameters;
     }
 }
+*/

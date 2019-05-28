@@ -12,8 +12,8 @@ public class Plateau {
     public int ymax;
 
     public Plateau(int x, int y) {
-
-        blocks = new Block[y][x];
+        this.ndiamond = 4;
+        this.blocks = new Block[y][x];
 
         this.xmax = x;
         this.ymax = y;
@@ -65,12 +65,12 @@ public class Plateau {
 
         this.blocks[9][9] = new Mob2();
 
-
         this.blocks[7][15] = new Player();
+
+        this.blocks[3][22] = new FinalBlock();
 
         this.xplayer = 15;
         this.yplayer = 7;
-        this.ndiamond = 0;
     }
 
     public void movePlayer(String direction) {
@@ -93,19 +93,30 @@ public class Plateau {
         this.blocks[yplayer][xplayer].setDirection(direction);
         if (this.blocks[yplayer + y][xplayer + x].breakable) {
             if (this.blocks[yplayer + y][xplayer + x].lootable)
-                ndiamond++;
+                if (ndiamond > 0)
+                    ndiamond--;
             this.blocks[yplayer + y][xplayer + x] = this.blocks[yplayer][xplayer];
             this.blocks[yplayer][xplayer] = new Vide();
             this.yplayer += y;
             this.xplayer += x;
-        }
-        else if (y == 0 && (this.blocks[yplayer][xplayer + x] instanceof Rock))
-            if (this.blocks[yplayer][xplayer + x * 2] instanceof Vide) {
-                this.blocks[yplayer][xplayer + x * 2] = this.blocks[yplayer][xplayer + x];
-                this.blocks[yplayer][xplayer + x] = this.blocks[yplayer][xplayer];
-                this.blocks[yplayer][xplayer] = new Vide();
-                this.xplayer += x;
+        } else {
+            if (y == 0 && (this.blocks[yplayer][xplayer + x] instanceof Rock)) {
+                if (this.blocks[yplayer][xplayer + x * 2] instanceof Vide) {
+                    this.blocks[yplayer][xplayer + x * 2] = this.blocks[yplayer][xplayer + x];
+                    this.blocks[yplayer][xplayer + x] = this.blocks[yplayer][xplayer];
+                    this.blocks[yplayer][xplayer] = new Vide();
+                    this.xplayer += x;
+                }
             }
+            else {
+                    if (this.blocks[yplayer + y][xplayer + x] instanceof FinalBlock) {
+                        if (ndiamond == 0) {
+                            System.out.println("You Win !!!!!!!!!!!!");
+                            System.exit(0);
+                        }
+                    }
+                }
+        }
     }
 
     public void update() {
@@ -140,18 +151,18 @@ public class Plateau {
 
     private void updatefall(int x, int y) {
 
-        if (move(x,y,x,y + 1)) {
-             this.blocks[y + 1][x].falling = true;
+        if (move(x, y, x, y + 1)) {
+            this.blocks[y + 1][x].falling = true;
             return;
         }
         if (this.blocks[y + 1][x].fall || this.blocks[y + 1][x] instanceof Wall) {
             if (this.blocks[y][x - 1] instanceof Vide)
-                if (move(x,y,x - 1,y + 1)){
+                if (move(x, y, x - 1, y + 1)) {
                     this.blocks[y + 1][x + 1].falling = true;
                     return;
                 }
             if (this.blocks[y][x + 1] instanceof Vide)
-                if (move(x,y,x + 1,y + 1)){
+                if (move(x, y, x + 1, y + 1)) {
                     this.blocks[y + 1][x + 1].falling = true;
                     return;
                 }
@@ -174,7 +185,6 @@ public class Plateau {
         }
 
         this.blocks[y][x].falling = false;
-
     }
 
     private void updatemob(int x, int y) {
@@ -185,8 +195,7 @@ public class Plateau {
                 if (this.blocks[y - 1][x] instanceof Player) {
                     System.out.println("mob eat player");
                     System.exit(0);
-                }
-                else if (move(x, y, "UP")) ;
+                } else if (move(x, y, "UP")) ;
                 else if (move(x, y, "RIGHT")) ;
                 else if (move(x, y, "LEFT")) ;
                 else if (move(x, y, "DOWN")) ;
@@ -232,7 +241,7 @@ public class Plateau {
                 this.blocks[y2][x2].direction = "RIGHT";
             return true;
         }
-            return false;
+        return false;
     }
 
     private boolean move(int x, int y, String direction) {
