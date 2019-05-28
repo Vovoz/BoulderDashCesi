@@ -15,7 +15,7 @@ public class RawMap {
 
     private ArrayList<RawElement> elements;
 
-    public RawMap(final String nameMap, final int width, final int nbrDiamond, final int timeRemanong){
+    public RawMap(final String nameMap, final int width, final int nbrDiamond, final int timeRemanong) {
 
     }
 }

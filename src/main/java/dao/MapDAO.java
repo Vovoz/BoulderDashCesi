@@ -19,7 +19,7 @@ public class MapDAO implements IMap {
     private Connection connection;
     private static CallableStatement statement;
 
-    public MapDAO(){
+    public MapDAO() {
         this.connection = Dao.getInstance().getConnection();
     }
 
@@ -30,12 +30,12 @@ public class MapDAO implements IMap {
 
     }
 
-    public void removeObjectType(final ObjectType objectType){
+    public void removeObjectType(final ObjectType objectType) {
         ArrayList<Parameters> parameters = new ArrayList<>();
         parameters.add(new Parameters<>(objectType.name(), TypeParameters.IN));
         this.createCallabStatement("boulderdash.removeObjectType(?)", parameters).ifPresent(MapDAO::executeCallStatement);
     }
-    
+
     public Optional<Object> getMap(final String nameMap) {
         Integer width = 0, height = 0, nbrDiamond = 0, timeReaming = 0, x = 0, y = 0;
         RawMap rawMap;
@@ -45,14 +45,14 @@ public class MapDAO implements IMap {
         parameters.add(new Parameters<>(nameMap, TypeParameters.IN));
         this.createCallStatement("boulderdash.getMap(?)", parameters).ifPresent(MapDAO::executeCallStatement);
         oResult = MapDAO.getResultSet();
-        if(oResult.isPresent()){
+        if (oResult.isPresent()) {
             try {
-                while (oResult.get().next()){
+                while (oResult.get().next()) {
                     width = (Integer) oResult.get().getObject("Width");
                     height = (Integer) oResult.get().getObject("Height");
                     nbrDiamond = (Integer) oResult.get().getObject("Diamond");
                     timeReaming = (Integer) oResult.get().getObject("RemainingTime");
-                    if (width == null || height == null ||  nbrDiamond == null || timeReaming == null){
+                    if (width == null || height == null || nbrDiamond == null || timeReaming == null) {
                         return Optional.empty();
                     }
                 }
@@ -60,22 +60,22 @@ public class MapDAO implements IMap {
                 e.printStackTrace();
                 return Optional.empty();
             }
-        } else  {
+        } else {
             return Optional.empty();
         }
-        
+
         rawMap = new RawMap(nameMap, width, height, nbrDiamond, timeReaming);
-        
+
         parameters.clear();
         parameters.add(new Parameters<>(nameMap, TypeParameters.IN));
         this.createCallableStatement("boulderdash.getMapObjects(?)", parameters).ifPresent(MapDAO::executeCallStatement);
         oResult = MapDAO.getResultSet();
-        if(oResult.isPresent()){
+        if (oResult.isPresent()) {
             try {
-                while (oResult.get().next()){
+                while (oResult.get().next()) {
                     ObjectType type = ObjectType.valueOf(oResult.get().getObject("TypeObject").toString());
-                    x = (Integer)oResult.get().getObject("CoordX");
-                    y = (Integer)oResult.get().getObject("CoordY");
+                    x = (Integer) oResult.get().getObject("CoordX");
+                    y = (Integer) oResult.get().getObject("CoordY");
                     rawMap.addElement(new RawElement(type, x, y));
                 }
             } catch (SQLException e) {
@@ -100,7 +100,7 @@ public class MapDAO implements IMap {
         this.createCallableStatement("boulderdash.addMap(?,?,?,?,?)", parameters).ifPresent(MapDAO::exectuteCallStatement);
         parameters.clear();
 
-        for(rawElement element : rawMap.getElements()){
+        for (rawElement element : rawMap.getElements()) {
             parameters.add(new Parameters<>(rawMap.getName(), TypeParameters.IN));
             parameters.add(new Parameters<>(rawMap.getObject().name(), TypeParameters.IN));
             parameters.add(new Parameters<>(rawMap.getX(), TypeParameters.IN));
@@ -125,10 +125,10 @@ public class MapDAO implements IMap {
         ArrayList<String> namnames = new ArrayList<>();
         createCallableStatement("boulderdash.getMapNames()", new ArrayList<>()).ifPresent(MapDAO::executeCallableStatement);
         oResult = getResultSet();
-        if(oResult.isPresent()){
+        if (oResult.isPresent()) {
             try {
-                while (oResult .get().next()){
-                    mapnames.add((String)oResult.get().getObject("Mapname"));
+                while (oResult.get().next()) {
+                    mapnames.add((String) oResult.get().getObject("Mapname"));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -137,74 +137,58 @@ public class MapDAO implements IMap {
         return mapnames;
     }
 
-    public final Optional<CallableStatement> createCallableStatement(String sql, final ArrayList<Parameters> parameters){
+    public final Optional<CallableStatement> createCallableStatement(String sql, final ArrayList<Parameters> parameters) {
 
         final String call = "{ call " + sql + " }";
         int i = 1;
         try {
             CallableStatement callableStatement = this.connection.prepareCall(call);
 
-                for (Parameters parameter : parameters){
-                    switch (parameter.getTypeParameters()){
-                        case IN:
-                            if(parameter.getParameter() instanceof Integer) {
-                                callableStatement.setInt(i, (Integer)parameter.getParameter());
-                            }
+            for (Parameters parameter : parameters) {
+                switch (parameter.getTypeParameters()) {
+                    case IN:
+                        if (parameter.getParameter() instanceof Integer) {
+                            callableStatement.setInt(i, (Integer) parameter.getParameter());
+                        } else if (parameter.getParameter() instanceof String) {
+                            callableStatement.setString(i, (String) parameter.getParameter());
+                        } else if (parameter.getParameter() instanceof Double) {
+                            callableStatement.setDouble(i, (Double) parameter.getParameter());
+                        } else if (parameter.getParameter() instanceof Boolean) {
+                            callableStatement.setBoolean(i, (Boolean) parameter.getParameter());
+                        } else if (parameter.getParameter() instanceof Date) {
+                            callableStatement.setDate(i, (Date) parameter.getParameter());
+                        }
 
-                            else if (parameter.getParameter() instanceof String){
-                                callableStatement.setString(i, (String)parameter.getParameter());
-                            }
+                        break;
 
-                            else if (parameter.getParameter() instanceof Double){
-                                callableStatement.setDouble(i, (Double)parameter.getParameter());
-                            }
+                    case OUT:
+                        if (parameter.getParameter() instanceof Integer) {
+                            callableStatement.registerOutParameter(i, Types.INTEGER);
+                        } else if (parameter.getParameter() instanceof String) {
+                            callableStatement.registerOutParameter(i, Types.VARCHAR);
+                        } else if (parameter.getParameter() instanceof Double) {
+                            callableStatement.registerOutParameter(i, Types.DOUBLE);
+                        } else if (parameter.getParameter() instanceof Boolean) {
+                            callableStatement.registerOutParameter(i, Types.BOOLEAN);
+                        } else if (parameter.getParameter() instanceof Date) {
+                            callableStatement.registerOutParameter(i, Types.DATE);
+                        }
 
-                            else if (parameter.getParameter() instanceof Boolean){
-                                callableStatement.setBoolean(i, (Boolean)parameter.getParameter());
-                            }
+                        break;
 
-                            else if (parameter.getParameter() instanceof Date){
-                                callableStatement.setDate(i, (Date)parameter.getParameter());
-                            }
-
-                            break;
-
-                        case OUT:
-                            if(parameter.getParameter() instanceof Integer) {
-                                callableStatement.registerOutParameter(i, Types.INTEGER);
-                            }
-
-                            else if(parameter.getParameter() instanceof String) {
-                                callableStatement.registerOutParameter(i, Types.VARCHAR);
-                            }
-
-                            else if(parameter.getParameter() instanceof Double) {
-                                callableStatement.registerOutParameter(i, Types.DOUBLE);
-                            }
-
-                            else if(parameter.getParameter() instanceof Boolean) {
-                                callableStatement.registerOutParameter(i, Types.BOOLEAN);
-                            }
-
-                            else if(parameter.getParameter() instanceof Date) {
-                                callableStatement.registerOutParameter(i, Types.DATE);
-                            }
-
-                            break;
-
-                        case INOUT:
-                            break;
-                    }
-                    i++;
+                    case INOUT:
+                        break;
                 }
-                return Optional.of(callableStatement);
+                i++;
+            }
+            return Optional.of(callableStatement);
         } catch (SQLException e) {
             e.printStackTrace();
             return Optional.empty();
         }
     }
 
-    public static void executeCallStatement(final CallableStatement callableStatement){
+    public static void executeCallStatement(final CallableStatement callableStatement) {
         try {
             callableStatement.execute();
             statement = callableStatement;
@@ -214,7 +198,7 @@ public class MapDAO implements IMap {
         return Optinal.empty();
     }
 
-    public static void  closeStatement(){
+    public static void closeStatement() {
         try {
             statement.close();
         } catch (SQLException e) {
@@ -225,5 +209,5 @@ public class MapDAO implements IMap {
     public final Connection getConnection() {
         return connection:
     }
-    
+
 }

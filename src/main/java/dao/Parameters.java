@@ -5,12 +5,12 @@ public class Parameters<T> {
     private T obj;
     private TypeParameters typeParameters;
 
-    public Parameters(final T obj, final TypeParameters typeParameters){
+    public Parameters(final T obj, final TypeParameters typeParameters) {
         this.obj = obj;
         this.typeParameters = typeParameters;
     }
 
-    public void setObj(T obj){
+    public void setObj(T obj) {
         this.obj = obj;
     }
 

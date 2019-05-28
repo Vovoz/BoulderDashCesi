@@ -11,7 +11,7 @@ public class Dao {
 
     private final static String user = "java";
 
-    private  final static String passwd = "test123";
+    private final static String passwd = "test123";
 
     private static Connection connection = null;
     private static Dao dao = null;
@@ -25,10 +25,10 @@ public class Dao {
         }
     }
 
-    public static Dao getInstance(){
-        if(dao == null){
-            synchronized (Dao.class){
-                if(dao == null) {
+    public static Dao getInstance() {
+        if (dao == null) {
+            synchronized (Dao.class) {
+                if (dao == null) {
                     new Dao();
                 }
             }
@@ -36,7 +36,7 @@ public class Dao {
         return dao;
     }
 
-    public Connection getConnection(){
+    public Connection getConnection() {
         return connection;
     }
 }
