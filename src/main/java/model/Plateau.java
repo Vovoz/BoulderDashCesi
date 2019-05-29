@@ -13,12 +13,16 @@ public class Plateau {
 
     public int level;
 
-    public Plateau(int x, int y,int level) {
-        this.ndiamond = 4;
-        this.blocks = new Block[y][x];
+    public Plateau(String map,int level) {
 
-        this.xmax = x;
-        this.ymax = y;
+
+        System.out.println(map);
+
+        this.ndiamond = 4;
+        this.blocks = new Block[15][32];
+
+        this.xmax = 32;
+        this.ymax = 15;
 
         this.level = level;
 

@@ -68,13 +68,13 @@ class DAOHelloWorld extends DAOEntity<HelloWorld> {
 		HelloWorld helloWorld = new HelloWorld();
 
 		try {
-			final String sql = "{call helloworldById(?)}";
+			final String sql = "{call MapsById(?)}";
 			final CallableStatement call = this.getConnection().prepareCall(sql);
 			call.setInt(1, id);
 			call.execute();
 			final ResultSet resultSet = call.getResultSet();
 			if (resultSet.first()) {
-				helloWorld = new HelloWorld(id, resultSet.getString("code"), resultSet.getString("message"));
+				helloWorld = new HelloWorld(id, resultSet.getString("nom"),resultSet.getInt("time"), resultSet.getString("map"));
 			}
 			return helloWorld;
 		} catch (final SQLException e) {
@@ -93,13 +93,13 @@ class DAOHelloWorld extends DAOEntity<HelloWorld> {
 		HelloWorld helloWorld = new HelloWorld();
 
 		try {
-			final String sql = "{call helloworldByCode(?)}";
+			final String sql = "{call MapsByCode(?)}";
 			final CallableStatement call = this.getConnection().prepareCall(sql);
 			call.setString(1, code);
 			call.execute();
 			final ResultSet resultSet = call.getResultSet();
 			if (resultSet.first()) {
-				helloWorld = new HelloWorld(resultSet.getInt("id"), code, resultSet.getString("message"));
+				helloWorld = new HelloWorld(resultSet.getInt("id"), code,resultSet.getInt("time"), resultSet.getString("message"));
 			}
 			return helloWorld;
 		} catch (final SQLException e) {

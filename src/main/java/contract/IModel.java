@@ -25,6 +25,7 @@ public interface IModel {
 	 *          the code
 	 */
 	void loadHelloWorld(String code);
+	void loadHelloWorld(int map);
 
 	void update();
 	/**

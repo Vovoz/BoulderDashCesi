@@ -9,7 +9,7 @@ public class DBProperties extends Properties {
 
     private static final long serialVersionUID = 5289057445894568927L;
     private final static String PROPERTIES_FILE_NAME = "model.properties";
-    private String url = "jdbc:mysql://localhost:3306/jpublankproject";
+    private String url = "jdbc:mysql://localhost:3306/boulderdash";
     private String login = "root";
     private String password = "";
 

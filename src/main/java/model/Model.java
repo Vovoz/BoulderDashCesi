@@ -56,7 +56,7 @@ public final class Model extends Observable implements IModel{
      *            the code
      */
 
-
+    @Override
     public void loadHelloWorld(final String code) {
         try {
             final DAOHelloWorld daoHelloWorld = new DAOHelloWorld(DBConnection.getInstance().getConnection());
@@ -65,6 +65,16 @@ public final class Model extends Observable implements IModel{
             e.printStackTrace();
         }
     }
+
+    public void loadHelloWorld(final int map) {
+        try {
+            final DAOHelloWorld daoHelloWorld = new DAOHelloWorld(DBConnection.getInstance().getConnection());
+            this.setHelloWorld(daoHelloWorld.find(map));
+        } catch (final SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 

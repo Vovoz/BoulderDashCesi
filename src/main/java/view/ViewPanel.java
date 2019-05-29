@@ -90,8 +90,6 @@ class ViewPanel extends JPanel implements Observer {
 		System.out.println("...");
 		if( this.getViewFrame().getController().plateau != null) {
 
-			this.getViewFrame().getModel().loadHelloWorld("GB");
-				System.out.println(this.getViewFrame().getModel().getHelloWorld().getMessage());
 			int x;
 			int y;
 			x =this.getViewFrame().getController().plateau.xplayer * this.tailleB / 3;

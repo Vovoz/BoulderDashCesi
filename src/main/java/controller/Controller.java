@@ -45,9 +45,11 @@ public final class Controller implements IController{
 
 		System.out.println();
 
-		this.model.loadHelloWorld("GB");
-		this.plateau = new Plateau(32,15,level);
-		this.seconde = 30;
+		this.model.loadHelloWorld(1);
+
+		this.plateau = new Plateau(this.model.getHelloWorld().getMap(),level);
+		this.seconde = this.model.getHelloWorld().getTime();
+
 		Timer t = new Timer(0, new Ticker(this));
 		t.start();
 	}

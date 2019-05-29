@@ -7,93 +7,90 @@ package entity;
  */
 public class HelloWorld extends Entity {
 
-	/** The id. */
-	private int			id;
+    /**
+     * The id.
+     */
+    private int id;
 
-	/** The key. */
-	private String	key;
+    /**
+     * The nom.
+     */
+    private String nom;
 
-	/** The message. */
-	private String	message;
+    /**
+     * The time.
+     */
+    private int time;
 
-	/**
-	 * Instantiates a new hello world.
-	 *
-	 * @param id
-	 *          the id
-	 * @param key
-	 *          the key
-	 * @param message
-	 *          the message
-	 */
-	public HelloWorld(final int id, final String key, final String message) {
-		this.setId(id);
-		this.setKey(key);
-		this.setMessage(message);
-	}
+    /**
+     * The map.
+     */
+    private String map;
 
-	/**
-	 * Instantiates a new hello world.
-	 */
-	public HelloWorld() {
-		this(0, "", "");
-	}
+    /**
+     * Instantiates a new hello world.
+     *
+     * @param id   the id
+     * @param nom  the nom
+     * @param time the time
+     * @param map  the map
+     */
+    public HelloWorld(final int id, final String nom, final int time, final String map) {
+        this.setId(id);
+        this.setNom(nom);
+        this.setId(time);
+        this.setMap(map);
 
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
-	 */
-	public int getId() {
-		return this.id;
-	}
+    }
 
-	/**
-	 * Sets the id.
-	 *
-	 * @param id
-	 *          the new id
-	 */
-	public void setId(final int id) {
-		this.id = id;
-	}
+    /**
+     * Instantiates a new hello world.
+     */
+    public HelloWorld() {
+        this(0, "",0, "");
+    }
 
-	/**
-	 * Gets the key.
-	 *
-	 * @return the key
-	 */
-	public String getKey() {
-		return this.key;
-	}
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
+    public int getId() {
+        return this.id;
+    }
 
-	/**
-	 * Sets the key.
-	 *
-	 * @param key
-	 *          the new key
-	 */
-	public void setKey(final String key) {
-		this.key = key;
-	}
+    /**
+     * Sets the id.
+     *
+     * @param id the new id
+     */
+    public void setId(final int id) {
+        this.id = id;
+    }
 
-	/**
-	 * Gets the message.
-	 *
-	 * @return the message
-	 */
-	public String getMessage() {
-		return this.message;
-	}
 
-	/**
-	 * Sets the message.
-	 *
-	 * @param message
-	 *          the new message
-	 */
-	public void setMessage(final String message) {
-		this.message = message;
-	}
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
+    public String getMap() {
+        return map;
+    }
+
+    public void setMap(String map) {
+        this.map = map;
+    }
 
 }
