@@ -19,7 +19,7 @@ public class Plateau {
     public Plateau(String map, int level) {
 
         this.xmax = 0;
-        this.ymax = 0;
+        this.ymax = 1;
 
         for (int n = 0;map.charAt(n) != '$' ; n++)
             this.xmax ++;
@@ -67,11 +67,17 @@ public class Plateau {
                     case '#':
                         this.blocks[y][x] = new Wall(level);
                         break;
-                    case 'D':
+                    case 'd':
                         this.blocks[y][x] = new Diamond(level);
                         break;
                     case 'P':
                         this.blocks[y][x] = new Player(level);
+                        break;
+                    case 'X':
+                        this.blocks[y][x] = new Dirt(level);
+                        break;
+                    case ' ':
+                        this.blocks[y][x] = new Vide(level);
                         break;
                     default:
                         this.blocks[y][x] = new Dirt(level);
