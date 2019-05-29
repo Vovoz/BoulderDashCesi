@@ -74,7 +74,7 @@ class DAOHelloWorld extends DAOEntity<HelloWorld> {
 			call.execute();
 			final ResultSet resultSet = call.getResultSet();
 			if (resultSet.first()) {
-				helloWorld = new HelloWorld(id, resultSet.getString("nom"),resultSet.getInt("time"), resultSet.getString("map"));
+				helloWorld = new HelloWorld(id, resultSet.getString("nom"),resultSet.getInt("diamond"),resultSet.getInt("time"), resultSet.getString("map"));
 			}
 			return helloWorld;
 		} catch (final SQLException e) {
@@ -99,7 +99,7 @@ class DAOHelloWorld extends DAOEntity<HelloWorld> {
 			call.execute();
 			final ResultSet resultSet = call.getResultSet();
 			if (resultSet.first()) {
-				helloWorld = new HelloWorld(resultSet.getInt("id"), code,resultSet.getInt("time"), resultSet.getString("message"));
+				helloWorld = new HelloWorld(resultSet.getInt("id"), code,resultSet.getInt("diamond"),resultSet.getInt("time"), resultSet.getString("message"));
 			}
 			return helloWorld;
 		} catch (final SQLException e) {

@@ -16,20 +16,21 @@ public class Plateau {
 
     public boolean exit;
 
-    public Plateau(String map, int level) {
+    public Plateau(String map, int diamond, int level) {
+
+        this.ndiamond = diamond;
 
         this.xmax = 0;
         this.ymax = 1;
 
-        for (int n = 0;map.charAt(n) != '$' ; n++)
-            this.xmax ++;
+        for (int n = 0; map.charAt(n) != '$'; n++)
+            this.xmax++;
 
-        for (int n = 0;n < map.length() ; n++)
-            if(map.charAt(n) == '$')
-                this.ymax ++;
+        for (int n = 0; n < map.length(); n++)
+            if (map.charAt(n) == '$')
+                this.ymax++;
 
 
-        this.ndiamond = 0;
         this.blocks = new Block[this.ymax][this.xmax];
 
 
@@ -72,12 +73,17 @@ public class Plateau {
                         break;
                     case 'P':
                         this.blocks[y][x] = new Player(level);
+                        this.xplayer = x;
+                        this.yplayer = y;
                         break;
                     case 'X':
                         this.blocks[y][x] = new Dirt(level);
                         break;
                     case ' ':
                         this.blocks[y][x] = new Vide(level);
+                        break;
+                    case 'O':
+                        this.blocks[y][x] = new Rock(level);
                         break;
                     default:
                         this.blocks[y][x] = new Dirt(level);
@@ -89,7 +95,6 @@ public class Plateau {
 
 
         }
-
 
 
         this.blocks[9][9] = new Mob2(this.level);
@@ -138,9 +143,10 @@ public class Plateau {
                 }
             } else {
                 if (this.blocks[yplayer + y][xplayer + x] instanceof FinalBlock) {
-                    if (ndiamond == 0) {
+                    if (this.ndiamond == 0) {
                         System.out.println("You Win !!!!!!!!!!!!");
-                        exit = false;
+                        this.blocks[yplayer + y][xplayer + x].setDirection("WIN");
+                        exit = true;
                     }
                 }
             }
@@ -250,6 +256,7 @@ public class Plateau {
             case "UP":
                 if (this.blocks[y - 1][x] instanceof Player) {
                     System.out.println("mob eat player");
+                    this.blocks[y - 1][x].setDirection("DEATH");
                     System.exit(0);
                 } else if (move(x, y, "UP")) ;
                 else if (move(x, y, "RIGHT")) ;
@@ -257,25 +264,31 @@ public class Plateau {
                 else if (move(x, y, "DOWN")) ;
                 break;
             case "DOWN":
-                if (this.blocks[y + 1][x] instanceof Player)
+                if (this.blocks[y + 1][x] instanceof Player){
+                    System.out.println("mob eat player");
+                    this.blocks[y - 1][x].setDirection("DEATH");
                     System.exit(0);
-                else if (move(x, y, "DOWN")) ;
+                }else if (move(x, y, "DOWN")) ;
                 else if (move(x, y, "LEFT")) ;
                 else if (move(x, y, "RIGHT")) ;
                 else if (move(x, y, "UP")) ;
                 break;
             case "LEFT":
-                if (this.blocks[y][x - 1] instanceof Player)
+                if (this.blocks[y][x - 1] instanceof Player){
+                    System.out.println("mob eat player");
+                    this.blocks[y - 1][x].setDirection("DEATH");
                     System.exit(0);
-                else if (move(x, y, "LEFT")) ;
+                }else if (move(x, y, "LEFT")) ;
                 else if (move(x, y, "UP")) ;
                 else if (move(x, y, "DOWN")) ;
                 else if (move(x, y, "RIGHT")) ;
                 break;
             case "RIGHT":
-                if (this.blocks[y][x + 1] instanceof Player)
+                if (this.blocks[y][x + 1] instanceof Player){
+                    System.out.println("mob eat player");
+                    this.blocks[y - 1][x].setDirection("DEATH");
                     System.exit(0);
-                else if (move(x, y, "RIGHT")) ;
+                } else if (move(x, y, "RIGHT")) ;
                 else if (move(x, y, "DOWN")) ;
                 else if (move(x, y, "UP")) ;
                 else if (move(x, y, "LEFT")) ;

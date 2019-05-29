@@ -61,12 +61,12 @@ public class Player extends Block{
                 break;
 
             case "WIN":
-                y=80;
+                y=176;
 
-                this.ximg[0] = 64;
-                this.ximg[1] = 80;
-                this.ximg[2] = 64;
-                this.ximg[3] = 80;
+                this.ximg[0] = 0;
+                this.ximg[1] = 16;
+                this.ximg[2] = 0;
+                this.ximg[3] = 16;
                 break;
 
         }
