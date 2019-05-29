@@ -87,7 +87,7 @@ class ViewPanel extends JPanel implements Observer {
 		graphics.setFont(fonte);
 		graphics.setColor(Color.white);
 
-		System.out.println("...");
+		//System.out.println("...");
 		if( this.getViewFrame().getController().plateau != null) {
 
 			int x;

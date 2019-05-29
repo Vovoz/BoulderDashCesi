@@ -19,10 +19,10 @@ public class Plateau {
     public Plateau(String map, int level) {
 
         this.ndiamond = 0;
-        this.blocks = new Block[15][32];
+        this.blocks = new Block[20][40];
 
-        this.xmax = 32;
-        this.ymax = 15;
+        this.xmax = 40;
+        this.ymax = 20;
 
         this.level = level;
 
@@ -45,7 +45,35 @@ public class Plateau {
             }
         }
 
+        int x = 0;
+        int y = 0;
+        for (int n = 0; n < map.length(); n++) {
+            char c = map.charAt(n);
+            System.out.println(c);
+            if (c == '$') {
+                y++;
+                x -= 40;
+            } else {
+                switch (c) {
+                    case '#':
+                        this.blocks[y][x] = new Wall(level);
+                        break;
+                    case 'D':
+                        this.blocks[y][x] = new Diamond(level);
+                        break;
+                    case 'P':
+                        this.blocks[y][x] = new Player(level);
+                        break;
+                    default:
+                        this.blocks[y][x] = new Dirt(level);
 
+
+                }
+                x++;
+            }
+
+
+        }
 
         /**
          *
@@ -171,39 +199,39 @@ public class Plateau {
         }
 
         if ((this.blocks[y + 1][x] instanceof Mob) && (this.blocks[y][x].falling)) {
-            if(this.blocks[y + 1][x] instanceof Player)
+            if (this.blocks[y + 1][x] instanceof Player)
                 exit = true;
             this.blocks[y + 1][x] = new Diamond(this.level);
 
-            if(this.blocks[y + 1][x + 1] instanceof Player)
+            if (this.blocks[y + 1][x + 1] instanceof Player)
                 exit = true;
             this.blocks[y + 1][x + 1] = new Diamond(this.level);
 
-            if(this.blocks[y + 1][x - 1] instanceof Player)
+            if (this.blocks[y + 1][x - 1] instanceof Player)
                 exit = true;
             this.blocks[y + 1][x - 1] = new Diamond(this.level);
 
-            if(this.blocks[y - 1][x] instanceof Player)
+            if (this.blocks[y - 1][x] instanceof Player)
                 exit = true;
             this.blocks[y - 1][x] = new Diamond(this.level);
 
-            if(this.blocks[y - 1][x + 1] instanceof Player)
+            if (this.blocks[y - 1][x + 1] instanceof Player)
                 exit = true;
             this.blocks[y - 1][x + 1] = new Diamond(this.level);
 
-            if(this.blocks[y - 1][x - 1] instanceof Player)
+            if (this.blocks[y - 1][x - 1] instanceof Player)
                 exit = true;
             this.blocks[y - 1][x - 1] = new Diamond(this.level);
 
-            if(this.blocks[y][x] instanceof Player)
+            if (this.blocks[y][x] instanceof Player)
                 exit = true;
             this.blocks[y][x] = new Diamond(this.level);
 
-            if(this.blocks[y][x + 1] instanceof Player)
+            if (this.blocks[y][x + 1] instanceof Player)
                 exit = true;
             this.blocks[y][x + 1] = new Diamond(this.level);
 
-            if(this.blocks[y][x - 1] instanceof Player)
+            if (this.blocks[y][x - 1] instanceof Player)
                 exit = true;
             this.blocks[y][x - 1] = new Diamond(this.level);
         }
