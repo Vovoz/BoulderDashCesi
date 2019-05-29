@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 29 mai 2019 à 15:00
+-- Généré le :  mer. 29 mai 2019 à 15:03
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -21,6 +21,21 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `boulderdash`
 --
+
+DELIMITER $$
+--
+-- Procédures
+--
+DROP PROCEDURE IF EXISTS `MapsByCode`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MapsByCode` (IN `p_code` CHAR(2))  NO SQL
+    SQL SECURITY INVOKER
+SELECT * FROM maps where code=p_code$$
+
+DROP PROCEDURE IF EXISTS `MapsById`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MapsById` (IN `p_id` INT)  NO SQL
+SELECT * FROM maps WHERE id = p_id$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
