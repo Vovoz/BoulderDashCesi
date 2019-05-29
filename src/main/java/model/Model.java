@@ -55,10 +55,7 @@ public final class Model extends Observable implements IModel{
      * @param code
      *            the code
      */
-    /*
-     * (non-Javadoc)
-     *
-     * @see contract.IModel#getMessage(java.lang.String)
+
 
     public void loadHelloWorld(final String code) {
         try {
@@ -69,7 +66,7 @@ public final class Model extends Observable implements IModel{
         }
     }
 
-     */
+
 
     public void update() {
         this.setChanged();

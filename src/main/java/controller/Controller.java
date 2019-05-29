@@ -5,7 +5,6 @@ import contract.IController;
 import contract.IModel;
 import contract.IView;
 import model.Plateau;
-import dao.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -39,15 +38,14 @@ public final class Controller implements IController{
 	public Controller(final IView view, final IModel model) {
 		this.setView(view);
 		this.model = model;
-
 	}
 
 
 	public void buildPlateau(final int map,final int level){
 
-		Dao bb = new Dao();
 		System.out.println();
 
+		this.model.loadHelloWorld("GB");
 		this.plateau = new Plateau(32,15,level);
 		this.seconde = 30;
 		Timer t = new Timer(0, new Ticker(this));
