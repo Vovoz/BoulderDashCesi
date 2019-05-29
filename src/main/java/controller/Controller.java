@@ -4,8 +4,8 @@ import contract.ControllerOrder;
 import contract.IController;
 import contract.IModel;
 import contract.IView;
-import model.Model;
 import model.Plateau;
+import dao.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -29,6 +29,7 @@ public final class Controller implements IController{
 
 	public Plateau plateau;
 
+	public int seconde;
 	/**
 	 * Instantiates a new controller.
 	 *
@@ -43,9 +44,13 @@ public final class Controller implements IController{
 
 
 	public void buildPlateau(final int map,final int level){
-		this.plateau = new Plateau(32,15,level);
 
-		Timer t = new Timer(10, new Ticker(this));
+		Dao bb = new Dao();
+		System.out.println();
+
+		this.plateau = new Plateau(32,15,level);
+		this.seconde = 30;
+		Timer t = new Timer(0, new Ticker(this));
 		t.start();
 	}
 	/**
@@ -61,6 +66,12 @@ public final class Controller implements IController{
 	}
 	private void setView(final IView pview) {
 		this.view = pview;
+	}
+
+	public void time(){
+		this.seconde--;
+		if(this.seconde == 0)
+			System.exit(0);
 	}
 
 	public void orderPerform(final ControllerOrder controllerOrder) {
@@ -99,9 +110,10 @@ class Ticker implements ActionListener {
 		if(n%20 == 0)
 			this.controller.plateau.update();
 
-
-		if(n%3 == 0)
 			this.controller.model.update();
+
+		if(n%100 == 0)
+			this.controller.time();
 
 		n++;
 

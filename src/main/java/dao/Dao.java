@@ -16,7 +16,7 @@ public class Dao {
     private static Connection connection = null;
     private static Dao dao = null;
 
-    private Dao() {
+    public Dao() {
         try {
             connection = DriverManager.getConnection(url, user, passwd);
         } catch (SQLException e) {

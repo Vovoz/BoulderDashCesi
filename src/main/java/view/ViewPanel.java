@@ -22,7 +22,8 @@ class ViewPanel extends JPanel implements Observer {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -998294702363713521L;
 
-	private Image diamondImage;
+	private Image diamondBar;
+	private Image timerBar;
 
 	private int nsprite = 0;
 
@@ -38,7 +39,8 @@ class ViewPanel extends JPanel implements Observer {
 		this.setViewFrame(viewFrame);
 		viewFrame.getModel().getObservable().addObserver(this);
 		try {
-			this.diamondImage = ImageIO.read(new File("Diamond_Bar.png"));
+			this.diamondBar = ImageIO.read(new File("Diamond_Bar.png"));
+			this.timerBar = ImageIO.read(new File("Timer_Bar.png"));
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -104,8 +106,10 @@ class ViewPanel extends JPanel implements Observer {
 			nsprite++;
 			if(nsprite == 40)
 				nsprite = 0;
-			graphics.drawImage(diamondImage,1,1,this);
-			graphics.drawString("" + this.getViewFrame().getController().plateau.ndiamond, 70, 45);
+			graphics.drawImage(diamondBar,1,1,this);
+			graphics.drawImage(timerBar,1,61,this);
+			graphics.drawString("" + this.getViewFrame().getController().plateau.ndiamond, 70, 44);
+			graphics.drawString("" + this.getViewFrame().getController().seconde, 70, 104);
 		}
 		else{
 			this.updateUI();
