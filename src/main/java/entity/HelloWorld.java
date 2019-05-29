@@ -38,7 +38,7 @@ public class HelloWorld extends Entity {
     public HelloWorld(final int id, final String nom, final int time, final String map) {
         this.setId(id);
         this.setNom(nom);
-        this.setId(time);
+        this.setTime(time);
         this.setMap(map);
 
     }

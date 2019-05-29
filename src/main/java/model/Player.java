@@ -51,6 +51,23 @@ public class Player extends Block{
             case "RIGHT":
                 y=48;
                 break;
+            case "DEATH":
+                y=80;
+
+                this.ximg[0] = 64;
+                this.ximg[1] = 80;
+                this.ximg[2] = 64;
+                this.ximg[3] = 80;
+                break;
+
+            case "WIN":
+                y=80;
+
+                this.ximg[0] = 64;
+                this.ximg[1] = 80;
+                this.ximg[2] = 64;
+                this.ximg[3] = 80;
+                break;
 
         }
         for(int n=0;n<4;n++)

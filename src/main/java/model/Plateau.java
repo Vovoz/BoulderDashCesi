@@ -1,5 +1,6 @@
 package model;
 
+
 public class Plateau {
     public Block blocks[][];
 
@@ -13,18 +14,19 @@ public class Plateau {
 
     public int level;
 
-    public Plateau(String map,int level) {
+    public boolean exit;
 
+    public Plateau(String map, int level) {
 
-        System.out.println(map);
-
-        this.ndiamond = 4;
+        this.ndiamond = 0;
         this.blocks = new Block[15][32];
 
         this.xmax = 32;
         this.ymax = 15;
 
         this.level = level;
+
+        exit = false;
 
         for (int n = 0; n < this.ymax; n++) {
             this.blocks[n][0] = new Wall(this.level);
@@ -42,34 +44,21 @@ public class Plateau {
                 this.blocks[n][i] = new Dirt(this.level);
             }
         }
-        this.blocks[5][13] = new Wall(this.level);
-        this.blocks[5][14] = new Wall(this.level);
-        this.blocks[5][15] = new Wall(this.level);
-        this.blocks[5][16] = new Wall(this.level);
 
-        this.blocks[4][16] = new Diamond(this.level);
-        this.blocks[3][16] = new Diamond(this.level);
-        this.blocks[4][17] = new Diamond(this.level);
-        this.blocks[3][17] = new Diamond(this.level);
 
-        this.blocks[4][18] = new Rock(this.level);
-        this.blocks[3][19] = new Rock(this.level);
-        this.blocks[2][17] = new Rock(this.level);
-        this.blocks[3][18] = new Rock(this.level);
 
-        this.blocks[8][18] = new Vide(this.level);
-        this.blocks[8][19] = new Vide(this.level);
-        this.blocks[9][18] = new Vide(this.level);
-        this.blocks[9][19] = new Vide(this.level);
+        /**
+         *
+         *
+         *
+         *
+         * A coder
+         *
+         *
+         *
+         *
+         */
 
-        this.blocks[9][19] = new Mob1(this.level);
-
-        this.blocks[8][8] = new Vide(this.level);
-        this.blocks[8][9] = new Vide(this.level);
-        this.blocks[9][8] = new Vide(this.level);
-        this.blocks[9][9] = new Vide(this.level);
-        this.blocks[10][8] = new Vide(this.level);
-        this.blocks[10][9] = new Vide(this.level);
 
         this.blocks[9][9] = new Mob2(this.level);
 
@@ -115,15 +104,14 @@ public class Plateau {
                     this.blocks[yplayer][xplayer] = new Vide(this.level);
                     this.xplayer += x;
                 }
-            }
-            else {
-                    if (this.blocks[yplayer + y][xplayer + x] instanceof FinalBlock) {
-                        if (ndiamond == 0) {
-                            System.out.println("You Win !!!!!!!!!!!!");
-                            System.exit(0);
-                        }
+            } else {
+                if (this.blocks[yplayer + y][xplayer + x] instanceof FinalBlock) {
+                    if (ndiamond == 0) {
+                        System.out.println("You Win !!!!!!!!!!!!");
+                        exit = false;
                     }
                 }
+            }
         }
     }
 
@@ -177,18 +165,46 @@ public class Plateau {
         }
         if ((this.blocks[y + 1][x] instanceof Player) && (this.blocks[y][x].falling)) {
             System.out.println("rock falling on player");
-            System.exit(0);
+
+            this.blocks[y + 1][x].setDirection("DEATH");
+            exit = true;
         }
 
         if ((this.blocks[y + 1][x] instanceof Mob) && (this.blocks[y][x].falling)) {
+            if(this.blocks[y + 1][x] instanceof Player)
+                exit = true;
             this.blocks[y + 1][x] = new Diamond(this.level);
+
+            if(this.blocks[y + 1][x + 1] instanceof Player)
+                exit = true;
             this.blocks[y + 1][x + 1] = new Diamond(this.level);
+
+            if(this.blocks[y + 1][x - 1] instanceof Player)
+                exit = true;
             this.blocks[y + 1][x - 1] = new Diamond(this.level);
+
+            if(this.blocks[y - 1][x] instanceof Player)
+                exit = true;
             this.blocks[y - 1][x] = new Diamond(this.level);
+
+            if(this.blocks[y - 1][x + 1] instanceof Player)
+                exit = true;
             this.blocks[y - 1][x + 1] = new Diamond(this.level);
+
+            if(this.blocks[y - 1][x - 1] instanceof Player)
+                exit = true;
             this.blocks[y - 1][x - 1] = new Diamond(this.level);
+
+            if(this.blocks[y][x] instanceof Player)
+                exit = true;
             this.blocks[y][x] = new Diamond(this.level);
+
+            if(this.blocks[y][x + 1] instanceof Player)
+                exit = true;
             this.blocks[y][x + 1] = new Diamond(this.level);
+
+            if(this.blocks[y][x - 1] instanceof Player)
+                exit = true;
             this.blocks[y][x - 1] = new Diamond(this.level);
         }
 
@@ -290,3 +306,6 @@ public class Plateau {
         return false;
     }
 }
+
+
+
