@@ -18,12 +18,19 @@ public class Plateau {
 
     public Plateau(String map, int level) {
 
+        this.xmax = 0;
+        this.ymax = 0;
+
+        for (int n = 0;map.charAt(n) != '$' ; n++)
+            this.xmax ++;
+
+        for (int n = 0;n < map.length() ; n++)
+            if(map.charAt(n) == '$')
+                this.ymax ++;
+
+
         this.ndiamond = 0;
-        this.blocks = new Block[20][40];
-
-        this.xmax = 40;
-        this.ymax = 20;
-
+        this.blocks = new Block[this.ymax][this.xmax];
 
 
         this.level = level;
@@ -54,30 +61,20 @@ public class Plateau {
             System.out.println(c);
             if (c == '$') {
                 y++;
-                x -= 40;
-
+                x -= this.xmax;
             } else {
                 switch (c) {
                     case '#':
                         this.blocks[y][x] = new Wall(level);
                         break;
-                    case 'O':
-                        this.blocks[y][x] = new Rock(level);
-                        break;
-                    case 'd':
+                    case 'D':
                         this.blocks[y][x] = new Diamond(level);
                         break;
                     case 'P':
                         this.blocks[y][x] = new Player(level);
                         break;
-                    case 'X':
-                        this.blocks[y][x] = new Dirt (level);
-                        break;
                     default:
                         this.blocks[y][x] = new Dirt(level);
-                        break;
-
-
 
 
                 }
@@ -87,53 +84,6 @@ public class Plateau {
 
         }
 
-        /**
-         *
-=======
-        int y = 0;
-        int x = 0;
-        String retour = "/n";
-        String tab = "/r";
-        for(int n=0;n<30;n++) {
-            char c = map.charAt(n);
-
-            x = n - y *64;
-            if(c == retour.charAt(0) || x == 64) {
-                y++;
-                x=0;
-            }
-            System.out.println(c);
-            switch (c) {
-                case '#':
-                    this.blocks[y][n] = new Wall(level);
-                    break;
-                case 'd':
-                    this.blocks[y][n] = new Diamond(level);
-                    break;
-                case 'X':
-                    this.blocks[y][n] = new Dirt(level);
-                    break;
-                case 'O':
-                    this.blocks[y][n] = new Rock(level);
-                    break;
-                case ' ':
-                    this.blocks[y][n] = new Vide(level);
-                    break;
-            }
-        }
-
-
-        /*
->>>>>>> Stashed changes
-         *
-         *
-         *
-         * A coder
-         *
-         *zz
-         *
-         *
-         */
 
 
         this.blocks[9][9] = new Mob2(this.level);
@@ -210,16 +160,14 @@ public class Plateau {
     }
 
     private void updateVide(int x, int y) {
-        if(y > 0 && y < 64 && x < this.xmax - 1){
-            if (this.blocks[y - 1][x].fall) {
-                this.updatefall(x, y - 1);
-            }
-            if (this.blocks[y - 1][x - 1].fall) {
-                this.updatefall(x - 1, y - 1);
-            }
-            if (this.blocks[y - 1][x + 1].fall) {
-                this.updatefall(x + 1, y - 1);
-            }
+        if (this.blocks[y - 1][x].fall) {
+            this.updatefall(x, y - 1);
+        }
+        if (this.blocks[y - 1][x - 1].fall) {
+            this.updatefall(x - 1, y - 1);
+        }
+        if (this.blocks[y - 1][x + 1].fall) {
+            this.updatefall(x + 1, y - 1);
         }
     }
 

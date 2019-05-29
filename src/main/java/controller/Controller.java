@@ -44,7 +44,7 @@ public final class Controller implements IController {
 
     public void buildPlateau(final int map, final int level) {
 
-        this.model.loadHelloWorld(1);
+        this.model.loadHelloWorld(map);
 
 
         this.plateau = new Plateau(this.model.getHelloWorld().getMap(), level);
