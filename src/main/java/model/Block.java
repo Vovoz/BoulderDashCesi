@@ -18,6 +18,10 @@ public abstract class Block{
     protected boolean fixed;
     protected boolean update;
 
+
+
+
+
     public Block(final int level) {
         ximg = new int[4];
         yimg = new int[4];
@@ -30,6 +34,7 @@ public abstract class Block{
         fixed = true;
         update = false;
         direction = "DOWN";
+
     }
 
     public Image getImage() {

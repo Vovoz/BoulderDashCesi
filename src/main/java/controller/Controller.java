@@ -46,6 +46,7 @@ public final class Controller implements IController {
 
         this.model.loadHelloWorld(1);
 
+
         this.plateau = new Plateau(this.model.getHelloWorld().getMap(), level);
         this.seconde = this.model.getHelloWorld().getTime();
 
