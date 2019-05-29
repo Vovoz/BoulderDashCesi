@@ -236,13 +236,13 @@ public class Plateau {
             this.blocks[y2][x2] = this.blocks[y1][x1];
             this.blocks[y1][x1] = new Vide(this.level);
             if (y2 < y1)
-                this.blocks[y2][x2].direction = "UP";
+                this.blocks[y2][x2].setDirection("UP");
             else
-                this.blocks[y2][x2].direction = "DOWN";
+                this.blocks[y2][x2].setDirection("DOWN");
             if (x2 < x1)
-                this.blocks[y2][x2].direction = "LEFT";
+                this.blocks[y2][x2].setDirection("LEFT");
             else
-                this.blocks[y2][x2].direction = "RIGHT";
+                this.blocks[y2][x2].setDirection("RIGHT");
             return true;
         }
         return false;
@@ -254,7 +254,7 @@ public class Plateau {
                 if (this.blocks[y - 1][x] instanceof Vide) {
                     this.blocks[y - 1][x] = this.blocks[y][x];
                     this.blocks[y][x] = new Vide(this.level);
-                    this.blocks[y - 1][x].direction = direction;
+                    this.blocks[y - 1][x].setDirection(direction);
                     return true;
                 }
                 break;
@@ -262,7 +262,7 @@ public class Plateau {
                 if (this.blocks[y + 1][x] instanceof Vide) {
                     this.blocks[y + 1][x] = this.blocks[y][x];
                     this.blocks[y][x] = new Vide(this.level);
-                    this.blocks[y + 1][x].direction = direction;
+                    this.blocks[y + 1][x].setDirection(direction);
                     return true;
                 }
                 break;
@@ -270,7 +270,7 @@ public class Plateau {
                 if (this.blocks[y][x - 1] instanceof Vide) {
                     this.blocks[y][x - 1] = this.blocks[y][x];
                     this.blocks[y][x] = new Vide(this.level);
-                    this.blocks[y][x - 1].direction = direction;
+                    this.blocks[y][x - 1].setDirection(direction);
                     return true;
                 }
                 break;
@@ -278,7 +278,7 @@ public class Plateau {
                 if (this.blocks[y][x + 1] instanceof Vide) {
                     this.blocks[y][x + 1] = this.blocks[y][x];
                     this.blocks[y][x] = new Vide(this.level);
-                    this.blocks[y][x + 1].direction = direction;
+                    this.blocks[y][x + 1].setDirection(direction);
                     return true;
                 }
                 break;
