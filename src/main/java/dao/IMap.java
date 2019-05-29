@@ -11,9 +11,9 @@ public interface IMap {
 
     ArrayList<String> getMapListNames();
 
-    void removeMap(final Stirng nameMap);
+    void removeMap(final String nameMap);
 
-    void addObjectType(final objectType);
+    void addObjectType(final ObjectType objectType);
 
     void removeObjectType(final ObjectType objectType);
 */
