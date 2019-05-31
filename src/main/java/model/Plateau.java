@@ -145,7 +145,7 @@ public class Plateau {
                 if (this.blocks[yplayer + y][xplayer + x] instanceof FinalBlock) {
                     if (this.ndiamond == 0) {
                         System.out.println("You Win !!!!!!!!!!!!");
-                        this.blocks[yplayer + y][xplayer + x].setDirection("WIN");
+                        this.blocks[yplayer][xplayer].setDirection("WIN");
                         exit = true;
                     }
                 }
@@ -257,7 +257,7 @@ public class Plateau {
                 if (this.blocks[y - 1][x] instanceof Player) {
                     System.out.println("mob eat player");
                     this.blocks[y - 1][x].setDirection("DEATH");
-                    System.exit(0);
+                    exit = true;
                 } else if (move(x, y, "UP")) ;
                 else if (move(x, y, "RIGHT")) ;
                 else if (move(x, y, "LEFT")) ;
@@ -267,7 +267,7 @@ public class Plateau {
                 if (this.blocks[y + 1][x] instanceof Player){
                     System.out.println("mob eat player");
                     this.blocks[y - 1][x].setDirection("DEATH");
-                    System.exit(0);
+                    exit = true;
                 }else if (move(x, y, "DOWN")) ;
                 else if (move(x, y, "LEFT")) ;
                 else if (move(x, y, "RIGHT")) ;
@@ -277,7 +277,7 @@ public class Plateau {
                 if (this.blocks[y][x - 1] instanceof Player){
                     System.out.println("mob eat player");
                     this.blocks[y - 1][x].setDirection("DEATH");
-                    System.exit(0);
+                    exit = true;
                 }else if (move(x, y, "LEFT")) ;
                 else if (move(x, y, "UP")) ;
                 else if (move(x, y, "DOWN")) ;
@@ -287,7 +287,7 @@ public class Plateau {
                 if (this.blocks[y][x + 1] instanceof Player){
                     System.out.println("mob eat player");
                     this.blocks[y - 1][x].setDirection("DEATH");
-                    System.exit(0);
+                    exit = true;
                 } else if (move(x, y, "RIGHT")) ;
                 else if (move(x, y, "DOWN")) ;
                 else if (move(x, y, "UP")) ;

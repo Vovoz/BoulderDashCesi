@@ -46,7 +46,7 @@ public final class Controller implements IController {
 
         this.model.loadHelloWorld(map);
 
-        this.plateau = new Plateau(this.model.getHelloWorld().getMap(),this.model.getHelloWorld().getDiamond(),  level);
+        this.plateau = new Plateau(this.model.getHelloWorld().getMap(), this.model.getHelloWorld().getDiamond(), level);
         this.seconde = this.model.getHelloWorld().getTime();
 
         Timer t = new Timer(0, new Ticker(this));
@@ -76,6 +76,7 @@ public final class Controller implements IController {
     }
 
     public void orderPerform(final ControllerOrder controllerOrder) {
+        if(!this.plateau.exit)
         switch (controllerOrder) {
             case UP:
                 System.out.println("UP");
