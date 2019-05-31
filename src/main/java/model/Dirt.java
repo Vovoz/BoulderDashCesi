@@ -1,6 +1,18 @@
 package model;
 
+/**
+ * The Class DAOHelloWorld.
+ *
+ * @author Alexis
+ */
+
 public class Dirt extends Block{
+
+    /**
+     * Instantiates a new Dirt.
+     *
+     * @param level the level
+     */
 
     public Dirt(final int level){
         super(level);

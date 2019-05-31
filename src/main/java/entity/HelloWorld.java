@@ -34,12 +34,18 @@ public class HelloWorld extends Entity {
     /**
      * Instantiates a new hello world.
      *
-     * @param id   the id
-     * @param nom  the nom
-     * @param time the time
-     * @param map  the map
+     * @param id
+     *          the id
+     * @param nom
+     *          the nom
+     * @param diamond
+     *           the time
+     * @param time
+     *           the time
+     * @param map
+     *          the map
      */
-    public HelloWorld(final int id, final String nom,final int diamond, final int time, final String map) {
+    public HelloWorld(final int id, final String nom, final int diamond, final int time, final String map) {
         this.setId(id);
         this.setNom(nom);
         this.setDiamond(diamond);
@@ -52,7 +58,7 @@ public class HelloWorld extends Entity {
      * Instantiates a new hello world.
      */
     public HelloWorld() {
-        this(0, "",0,0, "");
+        this(0, "", 0, 0, "");
     }
 
     /**

@@ -1,7 +1,18 @@
 package model;
 
+/**
+ * The Class DAOHelloWorld.
+ *
+ * @author Alexis
+ */
+
 public class Vide extends  Block{
 
+    /**
+     * Instantiates a new Vide.
+     *
+     * @param level the level
+     */
     public Vide(final int level){
         super(level);
         for(int n=0;n<4;n++)

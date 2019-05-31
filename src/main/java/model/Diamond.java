@@ -1,6 +1,18 @@
 package model;
 
+/**
+ * The Class DAOHelloWorld.
+ *
+ * @author Alexis
+ */
+
 public class Diamond extends Fall{
+    /**
+     * Instantiates a new Diamond.
+     *
+     * @param level the level
+     */
+
 
     public Diamond(final int level){
         super(level);

@@ -10,6 +10,11 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The Class DAOHelloWorld.
+ *
+ * @author Alexis
+ */
 
 /**
  * The Class Controller.

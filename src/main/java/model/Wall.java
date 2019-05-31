@@ -1,6 +1,17 @@
 package model;
 
+/**
+ * The Class DAOHelloWorld.
+ *
+ * @author Alexis
+ */
+
 public class Wall extends Block{
+    /**
+     * Instantiates a new Wall.
+     *
+     * @param level the level
+     */
 
     public Wall(final int level){
         super(level);

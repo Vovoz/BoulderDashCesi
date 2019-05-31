@@ -1,7 +1,18 @@
 package model;
 
+/**
+ * The Class DAOHelloWorld.
+ *
+ * @author Alexis
+ */
+
 public class Rock extends Fall {
 
+    /**
+     * Instantiates a new Rock.
+     *
+     * @param level the level
+     */
     public Rock(final int level){
         super(level);
         for(int n=0;n<4;n++)

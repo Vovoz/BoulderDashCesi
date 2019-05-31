@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * The Class DAOHelloWorld.
+ *
+ * @author Alexis
+ */
 
 public class Plateau {
     public Block blocks[][];
@@ -15,6 +20,18 @@ public class Plateau {
     public int level;
 
     public boolean exit;
+
+    /**
+     * Instantiates a new Plateau.
+     *
+     * @param map
+     *          the map
+     * @param diamond
+     *           the number of diamond
+     * @param level
+     *           the level
+     *
+     */
 
     public Plateau(String map, int diamond, int level) {
 

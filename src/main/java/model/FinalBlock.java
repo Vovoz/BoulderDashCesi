@@ -1,6 +1,18 @@
 package model;
 
+/**
+ * The Class DAOHelloWorld.
+ *
+ * @author Alexis
+ */
+
 public class FinalBlock extends Block{
+    /**
+     * Instantiates a new FinalBlock.
+     *
+     * @param level the level
+     */
+
 
     public FinalBlock(final int level){
         super(level);

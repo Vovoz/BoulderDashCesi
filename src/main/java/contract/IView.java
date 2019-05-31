@@ -11,6 +11,7 @@ public interface IView {
 	 * Prints the message.
 	 *
 	 * @param messagelevel
+	 * 			the message level
 	 * @param messagemap
 	 *          the message
 	 */

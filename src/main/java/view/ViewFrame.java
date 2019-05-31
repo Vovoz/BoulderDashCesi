@@ -140,8 +140,9 @@ class ViewFrame extends JFrame implements KeyListener {
 	 * Prints the message.
 	 *
 	 * @param messageLevel
+	 * 			the message level
 	 * @param messageMap
-	 *          the message
+	 *          the message map
 	 */
 	public void printMessage(final String messageLevel,final String messageMap) {
         int map = 42;

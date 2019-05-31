@@ -5,10 +5,21 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * The Class DAOHelloWorld.
+ *
+ * @author Alexis
+ */
+
 public class Player extends Block{
 
     private Image image;
 
+    /**
+     * Instantiates a new Player.
+     *
+     * @param level the level
+     */
 
     public Player(final int level){
         super(level);

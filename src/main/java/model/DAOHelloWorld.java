@@ -10,7 +10,7 @@ import entity.HelloWorld;
 /**
  * The Class DAOHelloWorld.
  *
- * @author Jean-Aymeric Diet
+ * @author l
  */
 class DAOHelloWorld extends DAOEntity<HelloWorld> {
 
