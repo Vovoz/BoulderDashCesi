@@ -88,7 +88,6 @@ class DAOHelloWorld extends DAOEntity<HelloWorld> {
 	 *
 	 * @see model.DAOEntity#find(java.lang.String)
 	 */
-	@Override
 	public HelloWorld find(final String code) {
 		HelloWorld helloWorld = new HelloWorld();
 
