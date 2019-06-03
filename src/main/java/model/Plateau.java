@@ -21,6 +21,15 @@ public class Plateau {
 
     public boolean exit;
 
+    private Block wall;
+    private Block dirt;
+    private Block diamond;
+    private Block player;
+    private Block vide;
+    private Block rock;
+    private Block mob1;
+    private Block mob2;
+
     /**
      * Instantiates a new Plateau.
      *
@@ -41,10 +50,14 @@ public class Plateau {
         this.xmax = 0;
         this.ymax = 1;
 
-        Block wall = new Wall(this.level);
-        Block dirt = new Dirt(this.level);
-        Block diamond = new Diamond(this.level);
-        Block player = new Player(level);
+        this.wall = new Wall(this.level);
+        this.dirt = new Dirt(this.level);
+        this.diamond = new Diamond(this.level);
+        this.player = new Player(this.level);
+        this.vide = new Vide(this.level);
+        this.rock = new Rock(this.level);
+        this.mob1 =  new Mob1(this.level);
+        this.mob2 =  new Mob2(this.level);
 
 
 
@@ -64,19 +77,19 @@ public class Plateau {
         exit = false;
 
         for (int n = 0; n < this.ymax; n++) {
-            this.blocks[n][0] = new Wall(this.level);
-            this.blocks[n][this.xmax - 1] = wall;
+            this.blocks[n][0] = this.wall;
+            this.blocks[n][this.xmax - 1] = this.wall;
         }
 
         for (int i = 0; i < this.xmax; i++) {
-            this.blocks[0][i] = new Wall(this.level);
-            this.blocks[this.ymax - 1][i] = wall;
+            this.blocks[0][i] = this.wall;
+            this.blocks[this.ymax - 1][i] = this.wall;
         }
 
 
         for (int n = 1; n < this.ymax - 1; n++) {
             for (int i = 1; i < this.xmax - 1; i++) {
-                this.blocks[n][i] = dirt;
+                this.blocks[n][i] = this.dirt;
             }
         }
 
@@ -91,27 +104,27 @@ public class Plateau {
             } else {
                 switch (c) {
                     case '#':
-                        this.blocks[y][x] = wall;
+                        this.blocks[y][x] = this.wall;
                         break;
                     case 'd':
-                        this.blocks[y][x] = diamond;
+                        this.blocks[y][x] = this.diamond;
                         break;
                     case 'P':
-                        this.blocks[y][x] =player;
+                        this.blocks[y][x] = this.player;
                         this.xplayer = x;
                         this.yplayer = y;
                         break;
                     case 'X':
-                        this.blocks[y][x] = dirt;
+                        this.blocks[y][x] = this.dirt;
                         break;
                     case ' ':
-                        this.blocks[y][x] = new Vide(level);
+                        this.blocks[y][x] = this.vide;
                         break;
                     case 'O':
-                        this.blocks[y][x] = new Rock(level);
+                        this.blocks[y][x] = this.rock;
                         break;
                     default:
-                        this.blocks[y][x] = dirt;
+                        this.blocks[y][x] = this.dirt;
 
 
                 }
@@ -122,9 +135,9 @@ public class Plateau {
         }
 
 
-        this.blocks[9][9] = new Mob2(this.level);
+        this.blocks[9][9] = this.mob2;
 
-        this.blocks[7][15] = new Player(this.level);
+        this.blocks[7][15] = this.player;
 
         this.blocks[3][22] = new FinalBlock(this.level);
 
@@ -155,7 +168,7 @@ public class Plateau {
                 if (ndiamond > 0)
                     ndiamond--;
             this.blocks[yplayer + y][xplayer + x] = this.blocks[yplayer][xplayer];
-            this.blocks[yplayer][xplayer] = new Vide(this.level);
+            this.blocks[yplayer][xplayer] = this.vide;
             this.yplayer += y;
             this.xplayer += x;
         } else {
@@ -163,7 +176,7 @@ public class Plateau {
                 if (this.blocks[yplayer][xplayer + x * 2] instanceof Vide) {
                     this.blocks[yplayer][xplayer + x * 2] = this.blocks[yplayer][xplayer + x];
                     this.blocks[yplayer][xplayer + x] = this.blocks[yplayer][xplayer];
-                    this.blocks[yplayer][xplayer] = new Vide(this.level);
+                    this.blocks[yplayer][xplayer] = vide;
                     this.xplayer += x;
                 }
             } else {
@@ -236,39 +249,39 @@ public class Plateau {
         if ((this.blocks[y + 1][x] instanceof Mob) && (this.blocks[y][x].getFalling())) {
             if (this.blocks[y + 1][x] instanceof Player)
                 exit = true;
-            this.blocks[y + 1][x] = new Diamond(this.level);
+            this.blocks[y + 1][x] = diamond;
 
             if (this.blocks[y + 1][x + 1] instanceof Player)
                 exit = true;
-            this.blocks[y + 1][x + 1] = new Diamond(this.level);
+            this.blocks[y + 1][x + 1] = diamond;
 
             if (this.blocks[y + 1][x - 1] instanceof Player)
                 exit = true;
-            this.blocks[y + 1][x - 1] = new Diamond(this.level);
+            this.blocks[y + 1][x - 1] = diamond;
 
             if (this.blocks[y - 1][x] instanceof Player)
                 exit = true;
-            this.blocks[y - 1][x] = new Diamond(this.level);
+            this.blocks[y - 1][x] = diamond;
 
             if (this.blocks[y - 1][x + 1] instanceof Player)
                 exit = true;
-            this.blocks[y - 1][x + 1] = new Diamond(this.level);
+            this.blocks[y - 1][x + 1] = diamond;
 
             if (this.blocks[y - 1][x - 1] instanceof Player)
                 exit = true;
-            this.blocks[y - 1][x - 1] = new Diamond(this.level);
+            this.blocks[y - 1][x - 1] = diamond;
 
             if (this.blocks[y][x] instanceof Player)
                 exit = true;
-            this.blocks[y][x] = new Diamond(this.level);
+            this.blocks[y][x] = diamond;
 
             if (this.blocks[y][x + 1] instanceof Player)
                 exit = true;
-            this.blocks[y][x + 1] = new Diamond(this.level);
+            this.blocks[y][x + 1] = diamond;
 
             if (this.blocks[y][x - 1] instanceof Player)
                 exit = true;
-            this.blocks[y][x - 1] = new Diamond(this.level);
+            this.blocks[y][x - 1] = diamond;
         }
 
         this.blocks[y][x].setFalling(false);
@@ -332,7 +345,7 @@ public class Plateau {
     private boolean move(int x1, int y1, int x2, int y2) {
         if (this.blocks[y2][x2] instanceof Vide) {
             this.blocks[y2][x2] = this.blocks[y1][x1];
-            this.blocks[y1][x1] = new Vide(this.level);
+            this.blocks[y1][x1] = vide;
             if (y2 < y1)
                 this.blocks[y2][x2].setDirection("UP");
             else
@@ -351,7 +364,7 @@ public class Plateau {
             case "UP":
                 if (this.blocks[y - 1][x] instanceof Vide) {
                     this.blocks[y - 1][x] = this.blocks[y][x];
-                    this.blocks[y][x] = new Vide(this.level);
+                    this.blocks[y][x] = vide;
                     this.blocks[y - 1][x].setDirection(direction);
                     return true;
                 }
@@ -359,7 +372,7 @@ public class Plateau {
             case "DOWN":
                 if (this.blocks[y + 1][x] instanceof Vide) {
                     this.blocks[y + 1][x] = this.blocks[y][x];
-                    this.blocks[y][x] = new Vide(this.level);
+                    this.blocks[y][x] = vide;
                     this.blocks[y + 1][x].setDirection(direction);
                     return true;
                 }
@@ -367,7 +380,7 @@ public class Plateau {
             case "LEFT":
                 if (this.blocks[y][x - 1] instanceof Vide) {
                     this.blocks[y][x - 1] = this.blocks[y][x];
-                    this.blocks[y][x] = new Vide(this.level);
+                    this.blocks[y][x] = vide;
                     this.blocks[y][x - 1].setDirection(direction);
                     return true;
                 }
@@ -375,7 +388,7 @@ public class Plateau {
             case "RIGHT":
                 if (this.blocks[y][x + 1] instanceof Vide) {
                     this.blocks[y][x + 1] = this.blocks[y][x];
-                    this.blocks[y][x] = new Vide(this.level);
+                    this.blocks[y][x] = vide;
                     this.blocks[y][x + 1].setDirection(direction);
                     return true;
                 }
