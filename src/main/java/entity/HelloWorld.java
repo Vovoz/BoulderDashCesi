@@ -3,7 +3,7 @@ package entity;
 /**
  * The Class HelloWorld.
  *
- * @author Jean-Aymeric Diet
+ * @author L
  */
 public class HelloWorld extends Entity {
 

@@ -1,5 +1,5 @@
 /**
- * @author Jean-Aymeric DIET jadiet@cesi.fr
+ * @author Alexis Baptiste Lionel Tom
  * @version 1.0
  */
 package main;
@@ -12,7 +12,7 @@ import view.View;
 /**
  * The Class Main.
  *
- * @author Jean-Aymeric Diet
+ * @author Alexis Baptiste Lionel Tom
  */
 public abstract class Main {
 

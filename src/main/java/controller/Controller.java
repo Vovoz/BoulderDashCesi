@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 /**
  * The Class DAOHelloWorld.
  *
- * @author Alexis
+ * @author Alexis Lionel
  */
 
 /**
