@@ -26,19 +26,27 @@ public class Plateau {
      *
      * @param map
      *          the map
-     * @param diamond
+     * @param ndiamond
      *           the number of diamond
      * @param level
      *           the level
      *
      */
 
-    public Plateau(String map, int diamond, int level) {
-
-        this.ndiamond = diamond;
+    public Plateau(String map, int ndiamond, int level) {
+        this.level = 1;
+        this.level = level;
+        this.ndiamond = ndiamond;
 
         this.xmax = 0;
         this.ymax = 1;
+
+        Block wall = new Wall(this.level);
+        Block dirt = new Dirt(this.level);
+        Block diamond = new Diamond(this.level);
+        Block player = new Player(level);
+
+
 
         for (int n = 0; map.charAt(n) != '$'; n++)
             this.xmax++;
@@ -51,24 +59,24 @@ public class Plateau {
         this.blocks = new Block[this.ymax][this.xmax];
 
 
-        this.level = level;
+
 
         exit = false;
 
         for (int n = 0; n < this.ymax; n++) {
             this.blocks[n][0] = new Wall(this.level);
-            this.blocks[n][this.xmax - 1] = new Wall(this.level);
+            this.blocks[n][this.xmax - 1] = wall;
         }
 
         for (int i = 0; i < this.xmax; i++) {
             this.blocks[0][i] = new Wall(this.level);
-            this.blocks[this.ymax - 1][i] = new Wall(this.level);
+            this.blocks[this.ymax - 1][i] = wall;
         }
 
 
         for (int n = 1; n < this.ymax - 1; n++) {
             for (int i = 1; i < this.xmax - 1; i++) {
-                this.blocks[n][i] = new Dirt(this.level);
+                this.blocks[n][i] = dirt;
             }
         }
 
@@ -83,18 +91,18 @@ public class Plateau {
             } else {
                 switch (c) {
                     case '#':
-                        this.blocks[y][x] = new Wall(level);
+                        this.blocks[y][x] = wall;
                         break;
                     case 'd':
-                        this.blocks[y][x] = new Diamond(level);
+                        this.blocks[y][x] = diamond;
                         break;
                     case 'P':
-                        this.blocks[y][x] = new Player(level);
+                        this.blocks[y][x] =player;
                         this.xplayer = x;
                         this.yplayer = y;
                         break;
                     case 'X':
-                        this.blocks[y][x] = new Dirt(level);
+                        this.blocks[y][x] = dirt;
                         break;
                     case ' ':
                         this.blocks[y][x] = new Vide(level);
@@ -103,7 +111,7 @@ public class Plateau {
                         this.blocks[y][x] = new Rock(level);
                         break;
                     default:
-                        this.blocks[y][x] = new Dirt(level);
+                        this.blocks[y][x] = dirt;
 
 
                 }
