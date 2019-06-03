@@ -76,7 +76,7 @@ public class Plateau {
         int y = 0;
         for (int n = 0; n < map.length(); n++) {
             char c = map.charAt(n);
-            System.out.println(c);
+            System.out.println("x:" + x + " y:" + y + "c:" + c);
             if (c == '$') {
                 y++;
                 x -= this.xmax;
