@@ -17,12 +17,14 @@ public abstract class Block {
     public int yimg[];
     public String direction;
 
-    protected boolean breakable;
-    protected boolean lootable;
-    protected boolean fall;
-    protected boolean falling;
-    protected boolean fixed;
-    protected boolean update;
+
+
+    private boolean breakable;
+    private boolean lootable;
+    private boolean fall;
+    private boolean falling;
+    private boolean fixed;
+    private boolean update;
 
 
     /**
@@ -31,7 +33,7 @@ public abstract class Block {
      * @param level the level
      */
 
-    public Block(final int level) {
+    Block(final int level) {
         ximg = new int[4];
         yimg = new int[4];
         setImage();
@@ -66,6 +68,58 @@ public abstract class Block {
 
     public void setDirection(String direction) {
         this.direction = direction;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public boolean getBreakable() {
+        return breakable;
+    }
+
+    public void setBreakable(boolean breakable) {
+        this.breakable = breakable;
+    }
+
+    public boolean getLootable() {
+        return this.lootable;
+    }
+
+    public void setLootable(boolean lootable) {
+        this.lootable = lootable;
+    }
+
+    public boolean getFall() {
+        return fall;
+    }
+
+    public void setFall(boolean fall) {
+        this.fall = fall;
+    }
+
+    public boolean getFalling() {
+        return falling;
+    }
+
+    public void setFalling(boolean falling) {
+        this.falling = falling;
+    }
+
+    public boolean getFixed() {
+        return fixed;
+    }
+
+    public void setFixed(boolean fixed) {
+        this.fixed = fixed;
+    }
+
+    public boolean getUpdate() {
+        return update;
+    }
+
+    public void setUpdate(boolean update) {
+        this.update = update;
     }
 
 }

@@ -19,6 +19,6 @@ public class Diamond extends Fall{
         for(int n=0;n<4;n++)
         this.ximg[n] = 64;
 
-        this.lootable = true;
+        this.setLootable(true);
     }
 }

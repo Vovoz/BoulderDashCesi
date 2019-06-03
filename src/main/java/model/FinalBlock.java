@@ -20,7 +20,7 @@ public class FinalBlock extends Block{
             this.ximg[n] = 96;
 
 
-        this.breakable = false;
+        this.setBreakable(false);
     }
 
 }

@@ -76,7 +76,7 @@
                         </goals>
                         <phase>site</phase>
                         <configuration>
-                            <skipDeploy>true</skipDeploy>
+                            <skip>true</skip>
                         </configuration>
                     </execution>
                 </executions>

@@ -19,7 +19,7 @@ public class Wall extends Block{
             this.ximg[n] = 0;
 
 
-        this.breakable = false;
+        this.setBreakable(false);
     }
 
     @Override

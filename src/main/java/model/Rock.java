@@ -18,7 +18,7 @@ public class Rock extends Fall {
         for(int n=0;n<4;n++)
             this.ximg[n] = 48;
 
-        this.breakable = false;
+        this.setBreakable(false);
     }
 
     @Override

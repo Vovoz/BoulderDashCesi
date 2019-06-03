@@ -142,8 +142,8 @@ public class Plateau {
                 break;
         }
         this.blocks[yplayer][xplayer].setDirection(direction);
-        if (this.blocks[yplayer + y][xplayer + x].breakable) {
-            if (this.blocks[yplayer + y][xplayer + x].lootable)
+        if (this.blocks[yplayer + y][xplayer + x].getBreakable()) {
+            if (this.blocks[yplayer + y][xplayer + x].getLootable())
                 if (ndiamond > 0)
                     ndiamond--;
             this.blocks[yplayer + y][xplayer + x] = this.blocks[yplayer][xplayer];
@@ -179,23 +179,23 @@ public class Plateau {
 
         for (int n = this.ymax - 1; n >= 0; n--)
             for (int i = this.xmax - 1; i >= 0; i--)
-                if (this.blocks[n][i] instanceof Mob && !this.blocks[n][i].update)
+                if (this.blocks[n][i] instanceof Mob && !this.blocks[n][i].getUpdate())
                     updatemob(i, n);
 
         for (int n = this.ymax - 1; n >= 0; n--)
             for (int i = this.xmax - 1; i >= 0; i--)
                 if (this.blocks[n][i] instanceof Mob)
-                    this.blocks[n][i].update = false;
+                    this.blocks[n][i].setUpdate(false);
     }
 
     private void updateVide(int x, int y) {
-        if (this.blocks[y - 1][x].fall) {
+        if (this.blocks[y - 1][x].getFall()) {
             this.updatefall(x, y - 1);
         }
-        if (this.blocks[y - 1][x - 1].fall) {
+        if (this.blocks[y - 1][x - 1].getFall()) {
             this.updatefall(x - 1, y - 1);
         }
-        if (this.blocks[y - 1][x + 1].fall) {
+        if (this.blocks[y - 1][x + 1].getFall()) {
             this.updatefall(x + 1, y - 1);
         }
     }
@@ -203,29 +203,29 @@ public class Plateau {
     private void updatefall(int x, int y) {
 
         if (move(x, y, x, y + 1)) {
-            this.blocks[y + 1][x].falling = true;
+            this.blocks[y + 1][x].setFalling(true);
             return;
         }
-        if (this.blocks[y + 1][x].fall || this.blocks[y + 1][x] instanceof Wall) {
+        if (this.blocks[y + 1][x].getFall() || this.blocks[y + 1][x] instanceof Wall) {
             if (this.blocks[y][x - 1] instanceof Vide)
                 if (move(x, y, x - 1, y + 1)) {
-                    this.blocks[y + 1][x + 1].falling = true;
+                    this.blocks[y + 1][x + 1].setFalling(true);
                     return;
                 }
             if (this.blocks[y][x + 1] instanceof Vide)
                 if (move(x, y, x + 1, y + 1)) {
-                    this.blocks[y + 1][x + 1].falling = true;
+                    this.blocks[y + 1][x + 1].setFalling(true);
                     return;
                 }
         }
-        if ((this.blocks[y + 1][x] instanceof Player) && (this.blocks[y][x].falling)) {
+        if ((this.blocks[y + 1][x] instanceof Player) && (this.blocks[y][x].getFalling())) {
             System.out.println("rock falling on player");
 
             this.blocks[y + 1][x].setDirection("DEATH");
             exit = true;
         }
 
-        if ((this.blocks[y + 1][x] instanceof Mob) && (this.blocks[y][x].falling)) {
+        if ((this.blocks[y + 1][x] instanceof Mob) && (this.blocks[y][x].getFalling())) {
             if (this.blocks[y + 1][x] instanceof Player)
                 exit = true;
             this.blocks[y + 1][x] = new Diamond(this.level);
@@ -263,11 +263,11 @@ public class Plateau {
             this.blocks[y][x - 1] = new Diamond(this.level);
         }
 
-        this.blocks[y][x].falling = false;
+        this.blocks[y][x].setFalling(false);
     }
 
     private void updatemob(int x, int y) {
-        this.blocks[y][x].update = true;
+        this.blocks[y][x].setUpdate(true);
 
         switch (this.blocks[y][x].direction) {
             case "UP":
