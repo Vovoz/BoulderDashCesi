@@ -278,7 +278,9 @@ public class Plateau {
                 } else if (move(x, y, "UP")) ;
                 else if (move(x, y, "RIGHT")) ;
                 else if (move(x, y, "LEFT")) ;
-                else if (move(x, y, "DOWN")) ;
+                else {
+                    move(x, y, "DOWN");
+                }
                 break;
             case "DOWN":
                 if (this.blocks[y + 1][x] instanceof Player){
@@ -288,7 +290,9 @@ public class Plateau {
                 }else if (move(x, y, "DOWN")) ;
                 else if (move(x, y, "LEFT")) ;
                 else if (move(x, y, "RIGHT")) ;
-                else if (move(x, y, "UP")) ;
+                else {
+                    move(x, y, "UP");
+                }
                 break;
             case "LEFT":
                 if (this.blocks[y][x - 1] instanceof Player){
@@ -298,7 +302,9 @@ public class Plateau {
                 }else if (move(x, y, "LEFT")) ;
                 else if (move(x, y, "UP")) ;
                 else if (move(x, y, "DOWN")) ;
-                else if (move(x, y, "RIGHT")) ;
+                else {
+                    move(x, y, "RIGHT");
+                }
                 break;
             case "RIGHT":
                 if (this.blocks[y][x + 1] instanceof Player){
@@ -308,7 +314,9 @@ public class Plateau {
                 } else if (move(x, y, "RIGHT")) ;
                 else if (move(x, y, "DOWN")) ;
                 else if (move(x, y, "UP")) ;
-                else if (move(x, y, "LEFT")) ;
+                else {
+                    move(x, y, "LEFT");
+                }
                 break;
         }
     }
