@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import entity.Entity;
 
-abstract class DAOEntity<E extends Entity> {
+abstract class DAOEntity <E> {
 
     private final Connection connection;
 
@@ -20,7 +20,8 @@ abstract class DAOEntity<E extends Entity> {
 
     public abstract boolean update(E entity);
 
+    public abstract boolean delete(E entity);
+
     public abstract E find(int id);
 
-    public abstract E find(String code);
 }
