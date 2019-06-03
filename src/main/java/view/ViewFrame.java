@@ -147,11 +147,20 @@ class ViewFrame extends JFrame implements KeyListener {
 	public void printMessage(final String messageLevel,final String messageMap) {
         int map = 42;
         while(map < 0 || map > 5)
-	        map = Integer.parseInt(JOptionPane.showInputDialog(messageMap));
+        	try {
+				map = Integer.parseInt(JOptionPane.showInputDialog(messageMap));
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+
 
         int level = 42;
         while(level < 0 || level > 7)
+			try {
             level = Integer.parseInt(JOptionPane.showInputDialog(messageLevel));
+			}catch (Exception e){
+				e.printStackTrace();
+			}
 
         this.getController().buildPlateau( map, level);
 		}
