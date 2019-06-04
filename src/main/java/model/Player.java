@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * The Class DAOHelloWorld.
+ * The Class Player.
  *
  * @author Alexis
  */
@@ -43,7 +43,6 @@ public class Player extends Block{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
      @Override
